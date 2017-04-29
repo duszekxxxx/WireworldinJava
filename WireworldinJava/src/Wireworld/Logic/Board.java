@@ -2,27 +2,49 @@
 package Wireworld.Logic;
 
 
-public class Board {
+public class Board implements BoardGame{
     
     
     private final States [][] board;
     int verticalSize;
     int horizontalSize;
     
-    public Board(int horizontalSize,int verticalSize){
-        this.board = new States[horizontalSize][verticalSize];
-        this.horizontalSize=horizontalSize;
-        this.verticalSize = verticalSize;    
+    public Board(){
+       this(100,100);
     }
 
+   
     
-    public States getBoard(int x, int y)  {
+    public Board(int horizontalSize,int verticalSize){
+        this.horizontalSize=horizontalSize;
+        this.verticalSize = verticalSize; 
+        this.board = new States[horizontalSize][verticalSize];
+           
+    }
+    
+     
+    @Override
+    public States getPointOnBoard(int x, int y)  {
         if(x>=this.horizontalSize && y>=this.verticalSize);
         return board[x][y];
     }
 
-   
-    public void setBoard(States value,int x, int y) {
+   @Override
+    public void setPointOnBoard(States value,int x, int y) {
         this.board[x][y] = value;
     }
+
+    @Override
+    public int getVerticalSize() {
+       return verticalSize;
+    }
+
+    @Override
+    public int getHorizontalSize() {
+       return horizontalSize;
+    }
+    
+
+ 
+
 }
