@@ -1,0 +1,8 @@
+generationCount = 30
+refreshTime = 500
+cellSize = 20
+frameWidth = 0
+distanceBetweenCells = 2
+zoomMajor = 50
+zoomMinor = 25
+boarderColor = Color.GRAY
