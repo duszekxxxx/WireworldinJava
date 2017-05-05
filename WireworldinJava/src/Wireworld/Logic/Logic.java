@@ -4,20 +4,26 @@ package Wireworld.Logic;
 
 public class Logic implements GameLogic{
     
+    
+    BoardGame board;
+    
     @Override
     public BoardGame makeGame(BoardGame board){
+        this.board = board;
         Board changedBoard = new Board(board.getHorizontalSize(),board.getVerticalSize());
         for(int x=0; x<board.getVerticalSize(); x++){
             for(int y=0; y < board.getVerticalSize(); y++){
-                changedBoard.setPointOnBoard(changeState(board.getPointOnBoard(x, y)), x, y);
+                States [] neighbourhood;
+                neighbourhood = getNeighbourhood(board,x,y);
+                changedBoard.setPointOnBoard(changeState(board.getPointOnBoard(x, y),neighbourhood), x, y);
             } 
         }
         
         
-        return board;
+        return changedBoard;
     }
     
-    private States changeState(States state){
+    private States changeState(States state,States [] neighbourhood){
         if(state instanceof ElectronHead){
             return new ElectronTail();
         }
@@ -28,9 +34,45 @@ public class Logic implements GameLogic{
             return state;
         }
          else if(state instanceof Conductor){
-            
+            if(checkNeighbourhood(neighbourhood)== 1 || checkNeighbourhood(neighbourhood) == 2 ){
+                return new ElectronHead();
+            }
         }
-        return new ElectronHead();
+         else{
+             return new Conductor();
+         }
+        return null;
+    }
+    
+    private int checkNeighbourhood(States [] neighbourhood){
+        int number = 0;
+        for(States e : neighbourhood){
+            if(e instanceof ElectronHead){
+                number++;
+            }
+        }
+        
+        return number;
+    }
+    
+    private States [] getNeighbourhood(BoardGame board,int x,int y){
+        States[] tmp = new States[9];
+        int k=0;
+        for(int i =-1; i <= 1; i++){
+            int tmpx = x+i;
+            if(tmpx<0) tmpx = board.getHorizontalSize()-1;
+            else if(tmpx>=board.getHorizontalSize()) tmpx = 0;
+            for(int j =-1; j <= 1; j++){
+                   int tmpy = y+j;
+                   if(tmpy<0) tmpx = board.getVerticalSize()-1;
+                   else if(tmpy>=board.getVerticalSize()) tmpx = 0;
+                if(!(i ==0 && j ==0)){
+                   tmp[k]=board.getPointOnBoard(tmpx, tmpy);
+                    k++;
+                }
+            }
+        }
+        return tmp;
     }
     
 }
