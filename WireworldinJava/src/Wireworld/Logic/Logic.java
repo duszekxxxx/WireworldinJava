@@ -64,8 +64,8 @@ public class Logic implements GameLogic{
             else if(tmpx>=board.getHorizontalSize()) tmpx = 0;
             for(int j =-1; j <= 1; j++){
                    int tmpy = y+j;
-                   if(tmpy<0) tmpx = board.getVerticalSize()-1;
-                   else if(tmpy>=board.getVerticalSize()) tmpx = 0;
+                   if(tmpy<0) tmpy = board.getVerticalSize()-1;
+                   else if(tmpy>=board.getVerticalSize()) tmpy = 0;
                 if(!(i ==0 && j ==0)){
                    tmp[k]=board.getPointOnBoard(tmpx, tmpy);
                     k++;
