@@ -5,9 +5,7 @@
  */
 package WireWorld.logicConector;
 
-import Wireworld.Logic.Board;
 import Wireworld.Logic.BoardGame;
-import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.GameLogic;
 import Wireworld.Logic.Logic;
 import javax.swing.JLabel;
@@ -36,6 +34,8 @@ public class logicOperator {
     }
 
     public BoardGame getGeneration(int i, JLabel label) {
+       /* Do it later
+        
         int j = 0;
         while (boardArray[i] == null) {
             if (i == 0) {
@@ -45,7 +45,7 @@ public class logicOperator {
                 label.setText(label.getText() + ".");
             }
             j++;
-        }
+        }*/
         return boardArray[i];
     }
 }

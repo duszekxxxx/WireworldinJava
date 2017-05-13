@@ -11,6 +11,7 @@ import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.ElectronTail;
 import Wireworld.Logic.EmptyCell;
 import java.io.File;
+import java.util.Random;
 
 /**
  *
@@ -25,9 +26,18 @@ public class LoadBoard {
             }
         }
         myBoardToTest.setPointOnBoard(new Conductor(), 5, 0);
-        myBoardToTest.setPointOnBoard(new ElectronHead(), 5, 1);
-        myBoardToTest.setPointOnBoard(new ElectronTail(), 5, 2);
-        myBoardToTest.setPointOnBoard(new Conductor(), 5, 3);
+                for(int i=1; i < 30; i++){
+            Random rand = new Random();
+            int randInt = rand.nextInt(3);
+            if(randInt == 0){
+                myBoardToTest.setPointOnBoard(new ElectronHead(), 5, i);
+            }else if (randInt == 1){
+                myBoardToTest.setPointOnBoard(new ElectronTail(), 5, i);
+            } else if(randInt == 2) {
+                myBoardToTest.setPointOnBoard(new Conductor(), 5, i);
+            }
+                    
+        }
         return myBoardToTest;
     }
 }
