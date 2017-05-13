@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package windows;
+package Wireworld.windows;
 
-import SthLikeTryToLinkLogicWithGuI.Board;
-import SthLikeTryToLinkLogicWithGuI.LoadBoard;
-import toolsAndSettings.SettingsContainer;
+import Wireworld.Logic.Board;
+import Wireworld.SthLikeTryToLinkLogicWithGuI.LoadBoard;
+import Wireworld.toolsAndSettings.SettingsContainer;
 import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -16,7 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import static toolsAndSettings.Tools.checkSettingsFieldsValue;
+import static Wireworld.toolsAndSettings.FramesTools.checkSettingsFieldsValue;
+import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
+import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
 
 /**
  *
@@ -232,6 +234,7 @@ public class JFrameMain extends javax.swing.JFrame {
         //Do it when all Logic will be complete
         /*if (valueChecker() != null) {
             //setVisible(false);
+            jLabelException.setText("");
             java.awt.EventQueue.invokeLater(() -> {
                 new JFrameViewer(settingsContainer, new Board()).setVisible(true);
             });
@@ -243,9 +246,10 @@ public class JFrameMain extends javax.swing.JFrame {
 
         File file = jFileChooserOpenFile.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (toolsAndSettings.Tools.checkExtension(file, "jww", jLabelException) || toolsAndSettings.Tools.checkExtension(file, "ww", jLabelException) || toolsAndSettings.Tools.checkExtension(file, "wwexample", jLabelException)) {
+            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "jww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "ww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "wwexample", jLabelException)) {
                 if (valueChecker() != null) {
-                    Board board = LoadBoard.LoadBoardFromFile(file);
+                    Board board = LoadBoard.loadBoardFromFile(file);
+                    jLabelException.setText("");
                     //setVisible(false);
                     java.awt.EventQueue.invokeLater(() -> {
                         new JFrameViewer(settingsContainer, board).setVisible(true);
@@ -259,9 +263,12 @@ public class JFrameMain extends javax.swing.JFrame {
         int response = jFileChooserConfigFile.showOpenDialog(this);
         File file = jFileChooserConfigFile.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (toolsAndSettings.Tools.checkExtension(file, "xml", jLabelException)) {
-                settingsContainer = settingsContainer.loadSettings(file.getPath(), jLabelException);
-                setUpFields();
+            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "xml", jLabelException)) {
+                SettingsContainer newSettings = loadSettings(file.getPath(), jLabelException);
+                if (newSettings != null) {
+                    settingsContainer = newSettings;
+                    setUpFields();
+                }
             }
         }
     }//GEN-LAST:event_jMenuItemImportConfigActionPerformed
@@ -278,8 +285,8 @@ public class JFrameMain extends javax.swing.JFrame {
         int response = jFileChooserConfigFileSaver.showSaveDialog(this);
         File file = jFileChooserConfigFileSaver.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (toolsAndSettings.Tools.checkExtension(file, "xml", jLabelException) && valueChecker() != null) {
-                settingsContainer.saveSettings(file, jLabelException);
+            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "xml", jLabelException) && valueChecker() != null) {
+                saveSettings(file, jLabelException, settingsContainer);
             }
         }
     }//GEN-LAST:event_jMenuItemExportConfigActionPerformed

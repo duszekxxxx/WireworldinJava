@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package windows;
+package Wireworld.windows;
 
 import Wireworld.Logic.BoardGame;
-import toolsAndSettings.SettingsContainer;
+import Wireworld.toolsAndSettings.SettingsContainer;
 import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import javax.swing.JSlider;
@@ -63,7 +63,7 @@ public class JFrameViewer extends javax.swing.JFrame {
         jSliderZoom = new javax.swing.JSlider();
         jLabelZoom = new javax.swing.JLabel();
         jScrollPaneWithVisualizationPanel = new javax.swing.JScrollPane();
-        jPanelRealTimeVisualization1 = new windows.JPanelRealTimeVisualization();
+        jPanelRealTimeVisualization1 = new Wireworld.windows.JPanelRealTimeVisualization();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("WireWorld");
@@ -329,7 +329,7 @@ public class JFrameViewer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelZoom;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private windows.JPanelRealTimeVisualization jPanelRealTimeVisualization1;
+    private Wireworld.windows.JPanelRealTimeVisualization jPanelRealTimeVisualization1;
     private javax.swing.JScrollPane jScrollPaneWithVisualizationPanel;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

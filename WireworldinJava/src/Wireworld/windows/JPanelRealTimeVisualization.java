@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package windows;
+package Wireworld.windows;
 
-import SthLikeTryToLinkLogicWithGuI.SthOperatingOnLogicIDontKnow;
+import Wireworld.SthLikeTryToLinkLogicWithGuI.SthOperatingOnLogicIDontKnow;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
@@ -29,7 +29,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     //private GameLogic logic;
     private SthOperatingOnLogicIDontKnow logic;
     private int currentCellSize;
-    private toolsAndSettings.SettingsContainer settingsContainer;
+    private Wireworld.toolsAndSettings.SettingsContainer settingsContainer;
     private int currentDistanceBetweenCells;
     private int zoom;
     private int currentBoardWidth;
@@ -61,7 +61,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /*Correct this when it will be conected with logic*/
-    public void setUpJPanel(toolsAndSettings.SettingsContainer settingsContainer, BoardGame board, JLabel jLabeCommunicats) {
+    public void setUpJPanel(Wireworld.toolsAndSettings.SettingsContainer settingsContainer, BoardGame board, JLabel jLabeCommunicats) {
         logic = new SthOperatingOnLogicIDontKnow();
         logic.generate(board, settingsContainer.getGenerationCount());
         this.columns = board.getHorizontalSize();
@@ -132,14 +132,14 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }
 
     private int getPanelHeight() {
-        int result = currentBoardWidth;
+        int result = currentBoardWidth*2;
         result += rows * currentCellSize;
         result += (rows - 1) * +currentDistanceBetweenCells;
         return result;
     }
 
     private int getPanelWidth() {
-        int result = currentBoardWidth;
+        int result = currentBoardWidth*2;
         result += columns * currentCellSize;
         result += (columns - 1) * +currentDistanceBetweenCells;
         return result;
