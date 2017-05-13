@@ -6,7 +6,7 @@
 package Wireworld.windows;
 
 import Wireworld.Logic.Board;
-import Wireworld.SthLikeTryToLinkLogicWithGuI.LoadBoard;
+import WireWorld.logicConector.LoadBoard;
 import Wireworld.toolsAndSettings.SettingsContainer;
 import java.awt.Toolkit;
 import java.io.File;

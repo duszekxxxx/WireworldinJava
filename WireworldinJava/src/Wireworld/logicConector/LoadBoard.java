@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Wireworld.SthLikeTryToLinkLogicWithGuI;
+package WireWorld.logicConector;
 
 import Wireworld.Logic.Board;
 import Wireworld.Logic.Conductor;
@@ -18,9 +18,9 @@ import java.io.File;
  */
 public class LoadBoard {
     public static Board loadBoardFromFile(File file){
-        Board myBoardToTest = new Board(100,100);
-        for(int i = 0;i < 100;i++){
-            for(int j =0 ; j < 100; j++ ){
+        Board myBoardToTest = new Board(10,30);
+        for(int i = 0;i < 10; i++){
+            for(int j =0 ; j < 30; j++ ){
                 myBoardToTest.setPointOnBoard(new EmptyCell(), i, j);
             }
         }

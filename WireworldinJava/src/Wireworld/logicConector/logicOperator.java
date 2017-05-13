@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Wireworld.SthLikeTryToLinkLogicWithGuI;
+package WireWorld.logicConector;
 
 import Wireworld.Logic.Board;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.GameLogic;
 import Wireworld.Logic.Logic;
-import com.sun.swing.internal.plaf.basic.resources.basic;
 import javax.swing.JLabel;
 
 /**
  *
  * @author Orion
  */
-public class SthOperatingOnLogicIDontKnow {
+public class logicOperator {
 
     private GameLogic logic = new Logic();
     private BoardGame[] boardArray;
@@ -30,7 +29,6 @@ public class SthOperatingOnLogicIDontKnow {
                 boardArray[0] = board;
                 for (int i = 0; i < (n); i++) {
                     boardArray[i+1] = logic.makeGame(boardArray[i]);
-                    testShow(boardArray, i);
                 }
             }
         };
@@ -49,17 +47,5 @@ public class SthOperatingOnLogicIDontKnow {
             j++;
         }
         return boardArray[i];
-    }
-
-    private void testShow(BoardGame[] boardArray, int i) {
-        System.out.println("Generacja: " + i);
-        int hight = boardArray[i].getVerticalSize();
-        int width = boardArray[i].getHorizontalSize();
-        for (int j = 0; j < hight; j++) {
-            for(int k =0; k < width; k++){
-                //System.out.println(boardArray[i].getPointOnBoard(j, k)+"");
-            }
-            System.out.println("\n");
-        }
     }
 }

@@ -5,7 +5,7 @@
  */
 package Wireworld.windows;
 
-import Wireworld.SthLikeTryToLinkLogicWithGuI.SthOperatingOnLogicIDontKnow;
+import WireWorld.logicConector.logicOperator;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
@@ -27,7 +27,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     private int rows;
     private int generation;
     //private GameLogic logic;
-    private SthOperatingOnLogicIDontKnow logic;
+    private logicOperator logic;
     private int currentCellSize;
     private Wireworld.toolsAndSettings.SettingsContainer settingsContainer;
     private int currentDistanceBetweenCells;
@@ -62,7 +62,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
 
     /*Correct this when it will be conected with logic*/
     public void setUpJPanel(Wireworld.toolsAndSettings.SettingsContainer settingsContainer, BoardGame board, JLabel jLabeCommunicats) {
-        logic = new SthOperatingOnLogicIDontKnow();
+        logic = new logicOperator();
         logic.generate(board, settingsContainer.getGenerationCount());
         this.columns = board.getHorizontalSize();
         this.rows = board.getVerticalSize();
