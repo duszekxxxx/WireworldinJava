@@ -56,7 +56,6 @@ public class SaveAndOpenGeneration {
     }
       public static BoardGame openFile(String FileName){
         
-          
           BoardGame board = XMLparser.parser(FileName);
           return board;
     }

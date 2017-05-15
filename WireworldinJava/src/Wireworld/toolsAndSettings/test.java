@@ -34,16 +34,16 @@ public class test {
         SaveAndOpenGeneration.saveToFile("generacja", plansza);
         
         BoardGame plansza2 = SaveAndOpenGeneration.openFile("generacja.xml");
-        System.out.println("Vertical Size: "+plansza2.getVerticalSize()+" Horizontal Size: "+plansza2.getHorizontalSize());
-        for (int i = 0; i < plansza2.getVerticalSize(); i++) {
+        System.out.println("Vertical Size: "+plansza.getVerticalSize()+" Horizontal Size: "+plansza2.getHorizontalSize());
+        for (int i = 0; i < plansza.getVerticalSize(); i++) {
             for (int j = 0; j < plansza.getHorizontalSize(); j++) {
                 if (plansza2.getPointOnBoard(j, i) instanceof ElectronHead) {
                     System.out.print("H");
-                } else if (plansza2.getPointOnBoard(j, i) instanceof ElectronTail) {
+                } else if (plansza.getPointOnBoard(j, i) instanceof ElectronTail) {
                     System.out.print("T");
-                } else if (plansza2.getPointOnBoard(j, i) instanceof Conductor) {
+                } else if (plansza.getPointOnBoard(j, i) instanceof Conductor) {
                     System.out.print("C");
-                } else if (plansza2.getPointOnBoard(j, i) instanceof EmptyCell) {
+                } else if (plansza.getPointOnBoard(j, i) instanceof EmptyCell) {
                     System.out.print("B");
                 }
             }

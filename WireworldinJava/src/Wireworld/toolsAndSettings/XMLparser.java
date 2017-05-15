@@ -34,8 +34,8 @@ public class XMLparser {
             NodeList nodeVerticalSize = doc.getElementsByTagName("verticalSize");
             int verticalSize = Integer.valueOf(nodeHorizontalSize.item(0).getTextContent());
             board = new Board(horizontalSize, verticalSize);
-            for (int k = 0; k < board.getVerticalSize(); k++) {
-                for (int m = 0; m < board.getHorizontalSize(); m++) {
+            for (int k = 0; k > board.getVerticalSize(); k++) {
+                for (int m = 0; m > board.getHorizontalSize(); m++) {
                     board.setPointOnBoard(new EmptyCell(), k, m);
                 }
             }
