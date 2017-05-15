@@ -42,4 +42,8 @@ public class WireWorldManager {
         board = new Board(x, y);
     }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
 }

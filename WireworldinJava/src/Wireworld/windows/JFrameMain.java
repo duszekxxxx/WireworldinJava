@@ -5,18 +5,18 @@
  */
 package Wireworld.windows;
 
-import Wireworld.Logic.Board;
-import WireWorld.logicConector.LoadBoard;
+import Wireworld.generator.WireWorldManager;
+import Wireworld.logicConector.LoadBoard;
 import Wireworld.toolsAndSettings.SettingsContainer;
 import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import static Wireworld.toolsAndSettings.FramesTools.checkSettingsFieldsValue;
+import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
 
@@ -31,7 +31,8 @@ public class JFrameMain extends javax.swing.JFrame {
     public JFrameMain() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
-        settingsContainer = new SettingsContainer("defaultSettings.xml", jLabelException);
+        SettingsManager.getInstance().setSettingsContainer("defaultSettings.xml", jLabelException);
+        settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         if (settingsContainer.isLoaded()) {
             setUpFields();
         }
@@ -231,14 +232,13 @@ public class JFrameMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateActionPerformed
-        //Do it when all Logic will be complete
-        /*if (valueChecker() != null) {
+        if (valueChecker() != null) {
             //setVisible(false);
             jLabelException.setText("");
             java.awt.EventQueue.invokeLater(() -> {
-                new JFrameViewer(settingsContainer, new Board()).setVisible(true);
+                new JFrameGenerateStart().setVisible(true);
             });
-        }*/
+        }
     }//GEN-LAST:event_jButtonGenerateActionPerformed
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
@@ -248,11 +248,11 @@ public class JFrameMain extends javax.swing.JFrame {
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
             if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "jww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "ww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "wwexample", jLabelException)) {
                 if (valueChecker() != null) {
-                    Board board = LoadBoard.loadBoardFromFile(file);
+                    LoadBoard.loadBoardFromFile(file);
                     jLabelException.setText("");
                     //setVisible(false);
                     java.awt.EventQueue.invokeLater(() -> {
-                        new JFrameViewer(settingsContainer, board).setVisible(true);
+                        new JFrameViewer().setVisible(true);
                     });
                 }
             }

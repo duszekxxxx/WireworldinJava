@@ -7,7 +7,7 @@ package Wireworld.elements;
 
 import Wireworld.Logic.Board;
 import Wireworld.generator.WireWorldManager;
-import Wireworld.windows.jFrameGenerator;
+import Wireworld.windows.JFrameGenerator;
 import javax.swing.JLabel;
 
 /**
@@ -49,13 +49,13 @@ public abstract class Element {
             settingPointsOnBoard(x, y);
             elementsList.addElement(this);
             increaseCounter();
-            jFrameGenerator.setComunicat("Element został dodany pomyślnie!", true);
+            JFrameGenerator.setComunicat("Element został dodany pomyślnie!", true);
         } else if (isColision(x, y)) {
-            jFrameGenerator.setComunicat("Nie można umieścić elementu: kolizja!", false);
+            JFrameGenerator.setComunicat("Nie można umieścić elementu: kolizja!", false);
         } else if (!isConectedToOther(x, y)) {
-            jFrameGenerator.setComunicat("Nie można umieścić elementu: brak połączenia między elementami lub lewą ścianą!", false);
+            JFrameGenerator.setComunicat("Nie można umieścić elementu: brak połączenia między elementami lub lewą ścianą!", false);
         } else if (checkBoundaryConditions(x, y)) {
-            jFrameGenerator.setComunicat("Nie można umieścić elementu: element wykracza poza granice!", false);
+            JFrameGenerator.setComunicat("Nie można umieścić elementu: element wykracza poza granice!", false);
         }
     }
 
@@ -76,9 +76,9 @@ public abstract class Element {
             drawingBackOnMap(label, x, y, false);
             deletePointsFromBoard(x, y);
             elementsList.deleteElement(number);
-            jFrameGenerator.setComunicat("Element został dodany usunięty!", true);
+            JFrameGenerator.setComunicat("Element został dodany usunięty!", true);
         } else {
-            jFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", true);
+            JFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", true);
         }
     }
 

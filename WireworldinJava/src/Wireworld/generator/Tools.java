@@ -5,11 +5,14 @@
  */
 package Wireworld.generator;
 
+import Wireworld.Logic.Board;
+import Wireworld.Logic.Conductor;
+import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.States;
 import Wireworld.elements.Diode;
 import Wireworld.elements.Element;
 import Wireworld.elements.SingleConductor;
-import static Wireworld.windows.jFrameGenerator.setComunicat;
+import static Wireworld.windows.JFrameGenerator.setComunicat;
 import javax.swing.JLabel;
 
 /**
@@ -42,7 +45,15 @@ public class Tools implements PicValues {
         deleteOperation = true;
         clear();
     }
-
+    
+    public static void setStartCurrent(){
+        Board board = WireWorldManager.getInstance().getBoard();
+        for(int i =0; i< board.getVerticalSize(); i++){
+            if(board.getPointOnBoard(0, i) instanceof Conductor){
+                board.setPointOnBoard(new ElectronHead(), 0, i);
+            }
+        }
+    }
     public void changeElement(JLabel label, boolean isConstant) {
         if (elementChoosen && deleteOperation == false) {
             if (element == null) {

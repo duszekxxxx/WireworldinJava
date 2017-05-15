@@ -21,7 +21,6 @@ public class CellMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent me) {
         if (tools.isDeleteOperation()) {
             tools.deleteElement((JLabel) me.getComponent());
-            System.out.println(me.getX());
         } else {
             tools.changeElement((JLabel) me.getComponent(), true);
         }

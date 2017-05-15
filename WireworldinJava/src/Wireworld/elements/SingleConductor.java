@@ -69,7 +69,6 @@ public class SingleConductor extends Element {
         boolean condition2 = y >= 0 && y < (mapVerticalSize - 1);
         if(x < (mapHorizontalSize - 1)){
             boolean condition3 = (board.getPointOnBoard(x+1, y)) instanceof EmptyCell;
-            //System.err.println(condition1 + " " + condition2 + " " + condition3);
             return condition1 && condition2 && condition3;
         } else{
             return condition1 && condition2; 

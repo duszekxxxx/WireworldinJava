@@ -5,8 +5,9 @@
  */
 package Wireworld.windows;
 
-import Wireworld.Logic.BoardGame;
+
 import Wireworld.toolsAndSettings.SettingsContainer;
+import Wireworld.toolsAndSettings.SettingsManager;
 import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import javax.swing.JSlider;
@@ -21,18 +22,12 @@ public class JFrameViewer extends javax.swing.JFrame {
     private final int refreshTime;
     private final int generationsCount;
 
-    /**
-     * Creates new form JFrameViewer
-     *
-     * @param settingsContainer
-     * @param board
-     * @param array
-     */
-    public JFrameViewer(SettingsContainer settingsContainer, BoardGame board) {
+    public JFrameViewer() {
         initComponents();
-        refreshTime = settingsContainer.getRefreshTime();
-        generationsCount = settingsContainer.getGenerationCount();
-        setUpComponents(settingsContainer, board);
+        SettingsContainer sc = SettingsManager.getInstance().getSettingsContainer();
+        refreshTime = sc.getRefreshTime();
+        generationsCount = sc.getGenerationCount();
+        setUpComponents();
         buttonsControler(0);
     }
 
@@ -394,14 +389,15 @@ public class JFrameViewer extends javax.swing.JFrame {
         }
     }
 
-    private void setUpComponents(SettingsContainer settingsContainer, BoardGame board) {
+    private void setUpComponents() {
+        SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
         jSliderZoom.setMajorTickSpacing(settingsContainer.getZoomMajor());
         jSliderZoom.setMinorTickSpacing(settingsContainer.getZoomMinor());
         jSliderZoom.setPaintTicks(true);
         jSliderZoom.setPaintLabels(true);
         jSliderZoom.addChangeListener(new sliderActionListner());
-        jPanelRealTimeVisualization1.setUpJPanel(settingsContainer, board, jLabelCommunicats);
+        jPanelRealTimeVisualization1.setUpJPanel(jLabelCommunicats);
         jScrollPaneWithVisualizationPanel.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
         jScrollPaneWithVisualizationPanel.repaint();
         jScrollPaneWithVisualizationPanel.repaint();

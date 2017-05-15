@@ -5,12 +5,16 @@
  */
 package Wireworld.windows;
 
-import WireWorld.logicConector.logicOperator;
+import Wireworld.logicConector.logicOperator;
+import Wireworld.Logic.Board;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.EmptyCell;
 import Wireworld.Logic.States;
+import Wireworld.generator.WireWorldManager;
+import Wireworld.toolsAndSettings.SettingsContainer;
+import Wireworld.toolsAndSettings.SettingsManager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,7 +33,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     //private GameLogic logic;
     private logicOperator logic;
     private int currentCellSize;
-    private Wireworld.toolsAndSettings.SettingsContainer settingsContainer;
+    private SettingsContainer settingsContainer;
     private int currentDistanceBetweenCells;
     private int zoom;
     private int currentBoardWidth;
@@ -61,7 +65,9 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /*Correct this when it will be conected with logic*/
-    public void setUpJPanel(Wireworld.toolsAndSettings.SettingsContainer settingsContainer, BoardGame board, JLabel jLabeCommunicats) {
+    public void setUpJPanel(JLabel jLabeCommunicats) {
+        Board board = WireWorldManager.getInstance().getBoard();
+        SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         logic = new logicOperator();
         logic.generate(board, settingsContainer.getGenerationCount());
         this.columns = board.getHorizontalSize();

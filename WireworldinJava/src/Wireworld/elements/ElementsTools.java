@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Wireworld.windows;
+package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
 import Wireworld.generator.WireWorldManager;
@@ -22,7 +22,7 @@ public class ElementsTools {
         JLabel elemLabel;
         elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
         if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("pConductor.png")));
+            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pConductor.png")));
         }
     }
 
@@ -30,7 +30,7 @@ public class ElementsTools {
         JLabel elemLabel;
         elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
         if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("pInvalid.png")));
+            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pInvalid.png")));
         }
     }
 
@@ -38,7 +38,7 @@ public class ElementsTools {
         JLabel elemLabel;
         elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
         if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("pBlank.png")));
+            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pBlank.png")));
         }
     }
 
@@ -66,7 +66,7 @@ public class ElementsTools {
         return Integer.parseInt(loc[1]);
     }
 
-    boolean isSetted(int x, int y) {
+    public boolean isSetted(int x, int y) {
             return WireWorldManager.getInstance().getBoard().getPointOnBoard(x, y) instanceof Conductor;
     }
 }

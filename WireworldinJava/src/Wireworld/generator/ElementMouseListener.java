@@ -5,7 +5,7 @@
  */
 package Wireworld.generator;
 
-import static Wireworld.windows.jFrameGenerator.setComunicat;
+import static Wireworld.windows.JFrameGenerator.setComunicat;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
