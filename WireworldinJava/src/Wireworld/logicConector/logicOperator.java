@@ -14,7 +14,7 @@ import javax.swing.JLabel;
  *
  * @author Orion
  */
-public class logicOperator {
+public class LogicOperator {
 
     private GameLogic logic = new Logic();
     private BoardGame[] boardArray;
@@ -27,6 +27,10 @@ public class logicOperator {
                 boardArray[0] = board;
                 for (int i = 0; i < (n); i++) {
                     boardArray[i+1] = logic.makeGame(boardArray[i]);
+                    for(int k = 0; k < 10; k++){
+                        System.out.println();
+                    }
+                    
                 }
             }
         };
