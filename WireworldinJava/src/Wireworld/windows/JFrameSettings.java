@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package windows;
+package Wireworld.windows;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-import toolsAndSettings.SettingsContainer;
-import static toolsAndSettings.Tools.checkSettingsFieldsValue;
+import Wireworld.toolsAndSettings.SettingsContainer;
+import static Wireworld.toolsAndSettings.FramesTools.checkSettingsFieldsValue;
+import static Wireworld.toolsAndSettings.SettingsTools.findColorName;
 
 /**
  *
@@ -20,7 +21,7 @@ public class JFrameSettings extends javax.swing.JFrame {
 
     public JFrameSettings(SettingsContainer settingsContainer) {
         initComponents();
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         this.settingsContainer = settingsContainer;
         if (settingsContainer.isLoaded()) {
             setUpFields();
@@ -252,7 +253,7 @@ public class JFrameSettings extends javax.swing.JFrame {
         jTextFieldCellSize.setText(settingsContainer.getCellSize() + "");
         jTextFieldDistanceBetweenCells.setText(settingsContainer.getDistanceBetweenCells() + "");
         jTextFieldFrameWidth.setText(settingsContainer.getFrameWidth() + "");
-        jComboBoxBoarderColor.setSelectedItem(settingsContainer.findColorName(settingsContainer.getBoarderColor()));
+        jComboBoxBoarderColor.setSelectedItem(findColorName(settingsContainer.getBoarderColor()));
         jTextFieldZoomMajor.setText(settingsContainer.getZoomMajor() + "");
         jTextFieldZoomMinor.setText(settingsContainer.getZoomMinor() + "");
     }

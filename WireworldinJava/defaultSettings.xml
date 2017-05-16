@@ -1,8 +1,15 @@
-generationCount = 30
-refreshTime = 500
-cellSize = 20
-frameWidth = 0
-distanceBetweenCells = 2
-zoomMajor = 50
-zoomMinor = 25
-boarderColor = Color.GRAY
+<?xml version="1.0"?>
+<wireWorldConfigFile>
+	<configuration>
+		<generationCount>30</generationCount>
+		<refreshTime>500</refreshTime>
+	</configuration>
+	<visualSettings>
+		<cellSize>20</cellSize>
+		<frameWidth>0</frameWidth>
+		<distanceBetweenCells>2</distanceBetweenCells>
+		<zoomMajor>50</zoomMajor>
+		<zoomMinor>25</zoomMinor>
+		<boarderColor>Color.GRAY</boarderColor>
+	</visualSettings>
+</wireWorldConfigFile>
