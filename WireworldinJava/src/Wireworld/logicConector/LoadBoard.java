@@ -19,10 +19,16 @@ import java.util.Random;
  * @author Orion
  */
 public class LoadBoard {
-    public static void loadBoardFromFile(File file){
-        Board myBoardToTest = new Board(14,14);
-        for(int i = 0;i < 14; i++){
-            for(int j =0 ; j < 14; j++ ){
+    //It's not ready yet
+    //
+    //
+    //
+    //
+
+    public static void loadBoardFromFile(File file) {
+        Board myBoardToTest = new Board(14, 14);
+        for (int i = 0; i < 14; i++) {
+            for (int j = 0; j < 14; j++) {
                 myBoardToTest.setPointOnBoard(new EmptyCell(), i, j);
             }
         }
@@ -43,8 +49,22 @@ public class LoadBoard {
         myBoardToTest.setPointOnBoard(new Conductor(), 5, 11);
         myBoardToTest.setPointOnBoard(new Conductor(), 5, 12);
         myBoardToTest.setPointOnBoard(new Conductor(), 5, 13);
-        
-        /*myBoardToTest.setPointOnBoard(new Conductor(), 5, 0);
+
+        /*myBoardToTest.setPointOnBoard(new ElectronTail(), 5, 0);
+        myBoardToTest.setPointOnBoard(new ElectronHead(), 5, 1);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 2);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 3);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 4);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 5);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 6);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 7);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 8);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 9);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 10);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 11);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 12);
+        myBoardToTest.setPointOnBoard(new Conductor(), 5, 13);*/
+ /*myBoardToTest.setPointOnBoard(new Conductor(), 5, 0);
                 for(int i=1; i < 30; i++){
             Random rand = new Random();
             int randInt = rand.nextInt(3);

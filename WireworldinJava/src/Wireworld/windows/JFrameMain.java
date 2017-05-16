@@ -30,7 +30,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
     public JFrameMain() {
         initComponents();
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         SettingsManager.getInstance().setSettingsContainer("defaultSettings.xml", jLabelException);
         settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         if (settingsContainer.isLoaded()) {

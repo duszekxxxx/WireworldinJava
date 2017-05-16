@@ -21,7 +21,7 @@ public class JFrameSettings extends javax.swing.JFrame {
 
     public JFrameSettings(SettingsContainer settingsContainer) {
         initComponents();
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         this.settingsContainer = settingsContainer;
         if (settingsContainer.isLoaded()) {
             setUpFields();

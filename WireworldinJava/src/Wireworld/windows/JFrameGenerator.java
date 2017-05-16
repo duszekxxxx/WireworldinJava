@@ -13,6 +13,7 @@ import Wireworld.generator.PicValues;
 import Wireworld.generator.Tools;
 import Wireworld.generator.WireWorldManager;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
@@ -26,7 +27,8 @@ public class JFrameGenerator extends JFrame implements PicValues {
     private static JButton jButtonDelete;
 
     public JFrameGenerator(int boardHorizontalSize, int boardVerticalSize) {
-        super("Drag and Drop Images"); //Change it later
+        super("WireWorld Generator"); //Change it later
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         drawJFrameElements();
         drawBoard(boardHorizontalSize, boardVerticalSize);
         setLayout(null);
@@ -85,8 +87,8 @@ public class JFrameGenerator extends JFrame implements PicValues {
 
     private void drawBoard(int mapHorizontalSize, int mapVerticalSize) {
         Board board = new Board(mapHorizontalSize, mapVerticalSize);
-        for (int y = 0; y < mapVerticalSize; y++) {
-            for (int x = 0; x < mapHorizontalSize; x++) {
+        for (int x = 0; x < mapHorizontalSize; x++) {
+            for (int y = 0; y < mapVerticalSize; y++) {
                 JLabel pic;
                 pic = new JLabel();
                 pic.setName(x + "x" + y);

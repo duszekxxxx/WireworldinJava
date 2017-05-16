@@ -33,7 +33,7 @@ public class Logic implements GameLogic {
         } else {
             return new Conductor();
         }
-        return null;
+        return state;
     }
 
     private int checkNeighbourhood(States[] neighbourhood) {
@@ -48,7 +48,7 @@ public class Logic implements GameLogic {
     }
 
     private States[] getNeighbourhood(BoardGame board, int x, int y) {
-        States[] tmp = new States[9];
+        States[] tmp = new States[8];
         int k = 0;
         for (int i = -1; i <= 1; i++) {
             int tmpx = x + i;
@@ -72,5 +72,4 @@ public class Logic implements GameLogic {
         }
         return tmp;
     }
-
 }

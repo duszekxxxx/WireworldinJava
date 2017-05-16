@@ -5,6 +5,8 @@
  */
 package Wireworld.windows;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Orion
@@ -16,6 +18,7 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
      */
     public JFrameGenerateStart() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
     }
 
     /**
@@ -34,7 +37,8 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("WireWorld Generator");
 
         jLabel1.setText("Wymiary planszy:");
 

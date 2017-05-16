@@ -391,7 +391,7 @@ public class JFrameViewer extends javax.swing.JFrame {
 
     private void setUpComponents() {
         SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("wwIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         jSliderZoom.setMajorTickSpacing(settingsContainer.getZoomMajor());
         jSliderZoom.setMinorTickSpacing(settingsContainer.getZoomMinor());
         jSliderZoom.setPaintTicks(true);
