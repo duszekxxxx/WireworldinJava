@@ -5,8 +5,9 @@
  */
 package Wireworld.generator;
 
-import Wireworld.Logic.Board;
+import Wireworld.Logic.BoardGame;
 import Wireworld.elements.ElementsList;
+import Wireworld.elements.ElementsListInterface;
 
 
 /**
@@ -16,8 +17,8 @@ import Wireworld.elements.ElementsList;
 public class WireWorldManager {
 
     private static WireWorldManager ourInstance = null;
-    private Board board;
-    private final ElementsList elementsList;
+    private BoardGame board;
+    private final ElementsListInterface elementsList;
 
     public static synchronized WireWorldManager getInstance() {
         if (null == ourInstance) {
@@ -30,19 +31,15 @@ public class WireWorldManager {
         elementsList = new ElementsList();
     }
 
-    public Board getBoard() {
+    public BoardGame getBoard() {
         return board;
     }
 
-    public ElementsList getElementsList() {
+    public ElementsListInterface getElementsList() {
         return elementsList;
     }
 
-    public void setNewBoard(int x, int y) {
-        board = new Board(x, y);
-    }
-
-    public void setBoard(Board board) {
+    public void setBoard(BoardGame board) {
         this.board = board;
     }
 

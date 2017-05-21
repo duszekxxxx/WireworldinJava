@@ -18,27 +18,25 @@ import javax.swing.JLabel;
  */
 public class ElementsTools {
 
-    public void picChange(int valueX, int valueY, JLabel label) {
-        JLabel elemLabel;
-        elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
-        if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pConductor.png")));
-        }
-    }
-
-    public void picChangeInvalid(int valueX, int valueY, JLabel label) {
-        JLabel elemLabel;
-        elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
-        if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pInvalid.png")));
-        }
-    }
-
-    public void picChangeBack(int valueX, int valueY, JLabel label) {
-        JLabel elemLabel;
-        elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
-        if (elemLabel != null) {
-            elemLabel.setIcon(new ImageIcon(getClass().getResource("../pBlank.png")));
+    public void picChange(int valueX, int valueY, JLabel label, String type) {
+        JLabel elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
+        System.err.println(type);
+        switch (type) {
+            case "valid":
+                elemLabel.setIcon(new ImageIcon(getClass().getResource("../pConductor.png")));
+                break;
+            case "invalid":
+                elemLabel.setIcon(new ImageIcon(getClass().getResource("../pInvalid.png")));
+                break;
+            case "changeBack":
+                if (isSetted(valueX, valueY)) {
+                    elemLabel.setIcon(new ImageIcon(getClass().getResource("../pConductor.png")));
+                } else {
+                    elemLabel.setIcon(new ImageIcon(getClass().getResource("../pBlank.png")));
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("picChange: invalid type. Type argument can be sat as: valid, invalid or changeBack");
         }
     }
 
@@ -67,6 +65,6 @@ public class ElementsTools {
     }
 
     public boolean isSetted(int x, int y) {
-            return WireWorldManager.getInstance().getBoard().getPointOnBoard(x, y) instanceof Conductor;
+        return WireWorldManager.getInstance().getBoard().getPointOnBoard(x, y) instanceof Conductor;
     }
 }

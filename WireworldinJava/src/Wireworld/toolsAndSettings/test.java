@@ -11,6 +11,7 @@ import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronTail;
 import Wireworld.Logic.EmptyCell;
+import java.io.File;
 
 /**
  *
@@ -31,9 +32,9 @@ public class test {
           plansza.setPointOnBoard(new Conductor(), i, 7);  
         }
         plansza.setPointOnBoard(new ElectronHead(), 9, 9);
-        SaveAndOpenGeneration.saveToFile("generacja", plansza);
+        SaveAndOpenGeneration.saveToFile(new File("generacja"), plansza);
         
-        BoardGame plansza2 = SaveAndOpenGeneration.openFile("generacja.xml");
+        BoardGame plansza2 = SaveAndOpenGeneration.openFile(new File("generacja.xml"));
         System.out.println("Vertical Size: "+plansza.getVerticalSize()+" Horizontal Size: "+plansza2.getHorizontalSize());
         for (int i = 0; i < plansza.getVerticalSize(); i++) {
             for (int j = 0; j < plansza.getHorizontalSize(); j++) {

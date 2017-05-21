@@ -5,10 +5,10 @@
  */
 package Wireworld.generator;
 
-import Wireworld.Logic.Board;
+import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
-import Wireworld.Logic.States;
+import Wireworld.Logic.ElectronTail;
 import Wireworld.elements.Diode;
 import Wireworld.elements.Element;
 import Wireworld.elements.SingleConductor;
@@ -23,14 +23,13 @@ public class Tools implements PicValues {
 
     private static String type = null;
     private static boolean elementChoosen;
-    private static boolean deleteOperation;
     private static JLabel previousLabel;
     private static Element element = null;
 
     public static void setType(String myType) {
         type = myType;
         elementChoosen = true;
-        deleteOperation = false;
+        element = null;
     }
 
     public static void clear() {
@@ -40,22 +39,26 @@ public class Tools implements PicValues {
         previousLabel = null;
     }
 
-    public static void setDeleteOperation() {
-        setType("");
+    /*public static void setDeleteOperation() {
         deleteOperation = true;
         clear();
-    }
-    
-    public static void setStartCurrent(){
-        Board board = WireWorldManager.getInstance().getBoard();
-        for(int i =0; i< board.getVerticalSize(); i++){
-            if(board.getPointOnBoard(0, i) instanceof Conductor){
-                board.setPointOnBoard(new ElectronHead(), 0, i);
+        setType("");
+    }*/
+
+    public static void setStartCurrent() {
+        BoardGame board = WireWorldManager.getInstance().getBoard();
+        for (int i = 0; i < board.getVerticalSize(); i++) {
+            if (board.getPointOnBoard(0, i) instanceof Conductor) {
+                board.setPointOnBoard(new ElectronTail(), 0, i);
+            }
+            if (board.getPointOnBoard(1, i) instanceof Conductor) {
+                board.setPointOnBoard(new ElectronHead(), 1, i);
             }
         }
     }
+
     public void changeElement(JLabel label, boolean isConstant) {
-        if (elementChoosen && deleteOperation == false) {
+        if (elementChoosen) {
             if (element == null) {
                 element = getElementByType();
             }
@@ -67,37 +70,12 @@ public class Tools implements PicValues {
         }
     }
 
-    public void deleteElement(JLabel label) {
-
-        String name = label.getName();
-        String loc[] = name.split("x");
-        int x = Integer.parseInt(loc[0]);
-        int y = Integer.parseInt(loc[1]);
-        States s = WireWorldManager.getInstance().getBoard().getPointOnBoard(x, y);
-        int number = s.getElementNumber();
-        String elementType = s.getElementType();
-        switch (elementType) {
-            case "Diode":
-                (new Diode()).deleteElement(label, number);
-                break;
-            case "SingleConductor":
-                (new SingleConductor()).deleteElement(label, number);
-                break;
-            default:
-                setComunicat("Wybrano nieobsługiwany element", false);
-                break;
-        }
-
-    }
-
-    public boolean isDeleteOperation() {
-        return deleteOperation;
-    }
-
     private Element getElementByType() {
         switch (type) {
-            case "Diode":
-                return null;//return new Diode();
+            case "ReversedDiode":
+                return new Diode("Reversed");
+            case "NormalDiode":
+                return new Diode("Normal");
             case "SingleConductor":
                 return new SingleConductor();
             default:

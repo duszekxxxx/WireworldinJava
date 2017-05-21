@@ -21,12 +21,12 @@ import org.xml.sax.SAXException;
  *
  * @author Orion
  */
-public class XMLFileLoader {
+public class XMLSettingsFileLoader {
 
     private JLabel jLabelException;
     private SettingsContainer settingsContainer;
 
-    public XMLFileLoader(JLabel jLabelException, SettingsContainer settingsContainer) {
+    public XMLSettingsFileLoader(JLabel jLabelException, SettingsContainer settingsContainer) {
         this.jLabelException = jLabelException;
         this.settingsContainer = settingsContainer;
     }

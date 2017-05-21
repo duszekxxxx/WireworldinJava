@@ -5,7 +5,9 @@
  */
 package Wireworld.elements;
 
-import Wireworld.Logic.Board;
+import Wireworld.Logic.BoardGame;
+import Wireworld.Logic.Conductor;
+import Wireworld.Logic.EmptyCell;
 import Wireworld.generator.WireWorldManager;
 import Wireworld.windows.JFrameGenerator;
 import javax.swing.JLabel;
@@ -16,28 +18,41 @@ import javax.swing.JLabel;
  */
 public abstract class Element {
 
-    protected static int elementCounter = 0;
     protected final int mapHorizontalSize;
     protected final int mapVerticalSize;
     protected final ElementsTools tools;
-    protected final Board board;
-    protected final ElementsList elementsList;
+    protected final BoardGame board;
+    protected final ElementsListInterface elementsList;
+    private static int elementCounter = 0;
+    private int positionX;
+    private int positionY;
+    private int myNumber;
+    private final String type;
 
-    public Element() {
+    public Element(String type) {
         mapVerticalSize = WireWorldManager.getInstance().getBoard().getVerticalSize();
         mapHorizontalSize = WireWorldManager.getInstance().getBoard().getHorizontalSize();
         elementsList = WireWorldManager.getInstance().getElementsList();
         board = WireWorldManager.getInstance().getBoard();
         tools = new ElementsTools();
+        this.type = type;
     }
 
     public void drawOnMap(JLabel label) {
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
         if (!isColision(x, y) && isConectedToOther(x, y) && checkBoundaryConditions(x, y)) {
-            drawingOnMap(label, x, y, true);
+            drawElement(label, x, y, "valid");
         } else if (checkBoundaryConditions(x, y)) {
-            drawingOnMap(label, x, y, false);
+            drawElement(label, x, y, "invalid");
+        }
+    }
+
+    public void drawBackOnMap(JLabel label) {
+        int x = tools.getX(label.getName());
+        int y = tools.getY(label.getName());
+        if (checkBoundaryConditions(x, y)) {
+            drawElement(label, x, y, "changeBack");
         }
     }
 
@@ -45,10 +60,12 @@ public abstract class Element {
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
         if (!isColision(x, y) && isConectedToOther(x, y) && checkBoundaryConditions(x, y)) {
-            drawingOnMap(label, x, y, true);
-            settingPointsOnBoard(x, y);
+            drawElement(label, x, y, "valid");
+            changePointsStatusOnBoard(x, y, "conductor");
             elementsList.addElement(this);
-            increaseCounter();
+            myNumber = elementCounter++;
+            positionX = x;
+            positionY = y;
             JFrameGenerator.setComunicat("Element został dodany pomyślnie!", true);
         } else if (isColision(x, y)) {
             JFrameGenerator.setComunicat("Nie można umieścić elementu: kolizja!", false);
@@ -59,22 +76,12 @@ public abstract class Element {
         }
     }
 
-    public void drawBackOnMap(JLabel label) {
-        int x = tools.getX(label.getName());
-        int y = tools.getY(label.getName());
-        if (checkBoundaryConditions(x, y)) {
-            boolean setted = tools.isSetted(x, y);
-            drawingBackOnMap(label, x, y, setted);
-        }
-    }
-
     public void deleteElement(JLabel label, int number) {
-        //Checking if it is on the last added element
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
         if (checkDeletionPosibility(x, y)) {
-            drawingBackOnMap(label, x, y, false);
-            deletePointsFromBoard(x, y);
+            drawElement(label, x, y, "changeBack");
+            changePointsStatusOnBoard(x, y, "emptyCell");
             elementsList.deleteElement(number);
             JFrameGenerator.setComunicat("Element został dodany usunięty!", true);
         } else {
@@ -82,28 +89,44 @@ public abstract class Element {
         }
     }
 
+    protected void setNewState(int x, int y, String type) {
+        switch (type) {
+            case "emptyCell":
+                board.setPointOnBoard(new EmptyCell(), x, y);
+                break;
+            case "conductor":
+                board.setPointOnBoard(new Conductor(elementCounter), x, y);
+                break;
+            default:
+                throw new IllegalArgumentException("picChange: invalid type. Type argument can be sat as: emptyCell, conductor ");
+        }
+    }
+
     public abstract boolean isConectedToOther(int x, int y);
 
     public abstract boolean isColision(int x, int y);
 
-    public abstract void drawingOnMap(JLabel label, int x, int y, boolean isAlright);
+    public abstract void changePointsStatusOnBoard(int x, int y, String type);
 
-    public abstract void drawingBackOnMap(JLabel label, int x, int y, boolean isAlright);
-
-    public abstract void settingPointsOnBoard(int x, int y);
+    public abstract boolean checkDeletionPosibility(int x, int y);
 
     public abstract boolean checkBoundaryConditions(int x, int y);
 
-    public abstract void deletePointsFromBoard(int x, int y);
-    
-    public abstract boolean checkDeletionPosibility(int x , int y);
+    public abstract void drawElement(JLabel label, int x, int y, String type);
 
-    public void increaseCounter() {
-        elementCounter++;
+    public int getPositionX() {
+        return positionX;
     }
 
-    public int getCounter() {
-        return elementCounter;
+    public int getPositionY() {
+        return positionY;
     }
-    
+
+    public int getMyNumber() {
+        return myNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

@@ -6,7 +6,7 @@
 package Wireworld.windows;
 
 import Wireworld.generator.WireWorldManager;
-import Wireworld.logicConector.LoadBoard;
+import Wireworld.toolsAndSettings.FramesTools;
 import Wireworld.toolsAndSettings.SettingsContainer;
 import java.awt.Toolkit;
 import java.io.File;
@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import static Wireworld.toolsAndSettings.FramesTools.checkSettingsFieldsValue;
+import static Wireworld.toolsAndSettings.SaveAndOpenGeneration.openFile;
 import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
@@ -31,7 +32,7 @@ public class JFrameMain extends javax.swing.JFrame {
     public JFrameMain() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
-        SettingsManager.getInstance().setSettingsContainer("defaultSettings.xml", jLabelException);
+        SettingsManager.getInstance().setSettingsContainer("defaultSettings.xml", jLabelCommunicats);
         settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         if (settingsContainer.isLoaded()) {
             setUpFields();
@@ -57,7 +58,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanelButtonsAndComunicats = new javax.swing.JPanel();
         jButtonGenerate = new javax.swing.JButton();
         jButtonLoad = new javax.swing.JButton();
-        jLabelException = new javax.swing.JLabel();
+        jLabelCommunicats = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuConfig = new javax.swing.JMenu();
         jMenuItemImportConfig = new javax.swing.JMenuItem();
@@ -71,6 +72,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WireWorld");
+        setLocationByPlatform(true);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,9 +136,9 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jLabelException.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabelException.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelException.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCommunicats.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabelCommunicats.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCommunicats.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanelButtonsAndComunicatsLayout = new javax.swing.GroupLayout(jPanelButtonsAndComunicats);
         jPanelButtonsAndComunicats.setLayout(jPanelButtonsAndComunicatsLayout);
@@ -148,14 +150,14 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addComponent(jButtonLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelButtonsAndComunicatsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelException, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelCommunicats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelButtonsAndComunicatsLayout.setVerticalGroup(
             jPanelButtonsAndComunicatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelButtonsAndComunicatsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelException, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelCommunicats, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelButtonsAndComunicatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLoad)
@@ -233,8 +235,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void jButtonGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateActionPerformed
         if (valueChecker() != null) {
-            //setVisible(false);
-            jLabelException.setText("");
+            jLabelCommunicats.setText("");
             java.awt.EventQueue.invokeLater(() -> {
                 new JFrameGenerateStart().setVisible(true);
             });
@@ -243,14 +244,12 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
         int response = jFileChooserOpenFile.showOpenDialog(this);
-
         File file = jFileChooserOpenFile.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "jww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "ww", jLabelException) || Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "wwexample", jLabelException)) {
+            if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
                 if (valueChecker() != null) {
-                    LoadBoard.loadBoardFromFile(file);
-                    jLabelException.setText("");
-                    //setVisible(false);
+                    WireWorldManager.getInstance().setBoard(openFile(file));
+                    jLabelCommunicats.setText("");
                     java.awt.EventQueue.invokeLater(() -> {
                         new JFrameViewer().setVisible(true);
                     });
@@ -263,8 +262,8 @@ public class JFrameMain extends javax.swing.JFrame {
         int response = jFileChooserConfigFile.showOpenDialog(this);
         File file = jFileChooserConfigFile.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "xml", jLabelException)) {
-                SettingsContainer newSettings = loadSettings(file.getPath(), jLabelException);
+            if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
+                SettingsContainer newSettings = loadSettings(file.getPath(), jLabelCommunicats);
                 if (newSettings != null) {
                     settingsContainer = newSettings;
                     setUpFields();
@@ -274,7 +273,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemImportConfigActionPerformed
 
     private void jMenuAboutMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuAboutMenuSelected
-        ImageIcon icon = new ImageIcon(getClass().getResource("wwIcon.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("../wwIcon.png"));
         JOptionPane.showMessageDialog(null, "WireWorld\n"
                 + "Program wykonany na zajęcia projektowe JIMP2\n"
                 + "Autorzy: Zarczuk Paweł, Milewski Patryk",
@@ -285,15 +284,15 @@ public class JFrameMain extends javax.swing.JFrame {
         int response = jFileChooserConfigFileSaver.showSaveDialog(this);
         File file = jFileChooserConfigFileSaver.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
-            if (Wireworld.toolsAndSettings.FramesTools.checkExtension(file, "xml", jLabelException) && valueChecker() != null) {
-                saveSettings(file, jLabelException, settingsContainer);
+            if (FramesTools.checkExtension(file, "xml", jLabelCommunicats) && valueChecker() != null) {
+                saveSettings(file, jLabelCommunicats, settingsContainer);
             }
         }
     }//GEN-LAST:event_jMenuItemExportConfigActionPerformed
 
     private void jMenuItemSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSettingsActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new JFrameSettings(settingsContainer).setVisible(true);
+            new JFrameSettings().setVisible(true);
         });
     }//GEN-LAST:event_jMenuItemSettingsActionPerformed
 
@@ -339,7 +338,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelException;
+    private javax.swing.JLabel jLabelCommunicats;
     private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuConfig;
@@ -356,7 +355,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private SettingsContainer valueChecker() {
         String generationCount = jTextFieldGenerationsCount.getText();
         String refreshTime = jTextFieldRefreshTime.getText();
-        return checkSettingsFieldsValue(settingsContainer, jLabelException,
+        return checkSettingsFieldsValue(settingsContainer, jLabelCommunicats,
                 generationCount, refreshTime);
     }
 
@@ -366,10 +365,8 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     private void setUpFileFilters() {
-        FileFilter standardFileFilter = new FileNameExtensionFilter("WireWorld", "ww", "jww");
-        FileFilter exampleFileFilter = new FileNameExtensionFilter("WireWorldExample", "wwexample");
-        jFileChooserOpenFile.addChoosableFileFilter(standardFileFilter);
-        jFileChooserOpenFile.addChoosableFileFilter(exampleFileFilter);
+        FileFilter loadFileFilter = new FileNameExtensionFilter("WireWorld", "xml");
+        jFileChooserOpenFile.addChoosableFileFilter(loadFileFilter);
 
         FileFilter configFileFilter = new FileNameExtensionFilter("WireWorld Configuration", "xml");
         jFileChooserConfigFile.addChoosableFileFilter(configFileFilter);

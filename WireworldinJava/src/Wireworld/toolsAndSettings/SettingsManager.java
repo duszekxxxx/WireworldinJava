@@ -5,9 +5,6 @@
  */
 package Wireworld.toolsAndSettings;
 
-import Wireworld.generator.*;
-import Wireworld.Logic.Board;
-import Wireworld.elements.ElementsList;
 import javax.swing.JLabel;
 
 

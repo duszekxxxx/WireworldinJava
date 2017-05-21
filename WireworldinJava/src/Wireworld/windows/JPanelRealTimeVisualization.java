@@ -5,8 +5,7 @@
  */
 package Wireworld.windows;
 
-import Wireworld.logicConector.LogicOperator;
-import Wireworld.Logic.Board;
+import Wireworld.Logic.LogicOperator;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
@@ -66,7 +65,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
 
     /*Correct this when it will be conected with logic*/
     public void setUpJPanel(JLabel jLabeCommunicats) {
-        Board board = WireWorldManager.getInstance().getBoard();
+        BoardGame board = WireWorldManager.getInstance().getBoard();
         SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         logic = new LogicOperator();
         logic.generate(board, settingsContainer.getGenerationCount());
@@ -114,7 +113,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
             g2d.fillRect(0, 0, getPanelHeight(), getPanelWidth());
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
-                    States value = board.getPointOnBoard(j, i);
+                    States value = board.getPointOnBoard(i, j);
                     g2d.setColor(checkCellColor(value));
                     g2d.fillRect(currentHeight, currentWidth, currentCellSize, currentCellSize);
                     currentWidth += currentCellSize + currentDistanceBetweenCells;
@@ -150,7 +149,9 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         result += (columns - 1) * +currentDistanceBetweenCells;
         return result;
     }
-
+    public BoardGame getGeneration(int i){
+        return logic.getGeneration(i, jLabeCommunicats);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
