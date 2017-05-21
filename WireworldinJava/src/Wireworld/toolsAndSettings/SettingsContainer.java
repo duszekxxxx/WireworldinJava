@@ -5,12 +5,8 @@
  */
 package Wireworld.toolsAndSettings;
 
-import static Wireworld.toolsAndSettings.SettingsTools.findColor;
-import static Wireworld.toolsAndSettings.SettingsTools.findColorName;
 import java.awt.Color;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import javax.swing.JLabel;
 import org.w3c.dom.Document;
 
@@ -36,7 +32,7 @@ public class SettingsContainer {
         this.jLabelException = jLabelException;
         this.path = path;
         /*Move this fragment from this and move saveSettings and loadSettings to SettingsTools*/
-        XMLFileLoader loader = new XMLFileLoader(jLabelException, this);
+        XMLSettingsFileLoader loader = new XMLSettingsFileLoader(jLabelException, this);
         Document document = loader.getXMLDocument(new File(path));
         if (document != null) {
             loader.xmlRead(document);

@@ -7,6 +7,7 @@ import Wireworld.Logic.Conductor;
 import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.ElectronTail;
 import Wireworld.Logic.EmptyCell;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,12 @@ import org.xml.sax.SAXException;
 
 public class XMLparser {
 
-    public static BoardGame parser(String fileName) {
+    public static BoardGame parser(File file) {
         BoardGame board;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(fileName);
+            Document doc = builder.parse(file);
             NodeList nodeHorizontalSize = doc.getElementsByTagName("horizontalSize");
             int horizontalSize = Integer.valueOf(nodeHorizontalSize.item(0).getTextContent());
             NodeList nodeVerticalSize = doc.getElementsByTagName("verticalSize");

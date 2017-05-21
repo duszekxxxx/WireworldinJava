@@ -8,6 +8,7 @@ package Wireworld.toolsAndSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.findColor;
 import java.awt.Color;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 import javax.swing.JLabel;
 
@@ -17,11 +18,11 @@ import javax.swing.JLabel;
  */
 public class FramesTools {
 
-    public static boolean checkExtension(File file, String xml, JLabel jLabelExceptions) {
+    public static boolean checkExtension(File file, String expectedExt, JLabel jLabelExceptions) {
         try {
             String extension = file.getName();
             String[] tmp = extension.split(Pattern.quote("."));
-            if (file == null || !tmp[1].equals("xml")) {
+            if (file == null || !tmp[1].equals(expectedExt)) {
                 jLabelExceptions.setText("Nieprawidłowy plik");
                 return false;
             } else {
@@ -55,7 +56,7 @@ public class FramesTools {
 
     public static SettingsContainer checkSettingsFieldsValue(SettingsContainer settingsContainer, JLabel jLabelException,
             String generationCount, String refreshTime) {
-        
+
         try {
             settingsContainer.setRefreshTime(Integer.parseInt(refreshTime));
             settingsContainer.setGenerationCount(Integer.parseInt(generationCount));

@@ -17,30 +17,32 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
+/**
+ *
+ * @author Orion
+ */
 public class JFrameGenerator extends JFrame implements PicValues {
 
-    // It should not be public
-    private static JButton jButtonDiode;
-    private static JButton jButtonStart;
-    private static JButton jButtonConductor;
+    private JButton jButtonNormalDiode;
+    private JButton jButtonReversedDiode;
+    private JButton jButtonGateXOR;
+    private JButton jButtonGateOR;
+    private JButton jButtonStart;
+    private JButton jButtonConductor;
+    private JButton jButtonDelete;
     private static JLabel jLabelInfo;
-    private static JButton jButtonDelete;
 
     public JFrameGenerator(int boardHorizontalSize, int boardVerticalSize) {
-        super("WireWorld Generator"); //Change it later
+        super("WireWorld Generator");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
         drawJFrameElements();
         drawBoard(boardHorizontalSize, boardVerticalSize);
         setLayout(null);
-        setSize(1000, 500);
+        setSize(1000, 800);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    /*   public static void main(String[] args) {
-        container = new JFrameGenerator(5, 20);
-        container.setVisible(true);
-    }*/
     private void drawJFrameElements() {
 
         jButtonConductor = new JButton();
@@ -48,22 +50,37 @@ public class JFrameGenerator extends JFrame implements PicValues {
         jButtonConductor.setBounds(5, MAP_TOP_Y, 150, 30);
         jButtonConductor.addMouseListener(new ElementMouseListener("SingleConductor"));
 
-        jButtonDiode = new JButton();
-        jButtonDiode.setText("Dioda");
-        jButtonDiode.setBounds(5, MAP_TOP_Y + 35, 150, 30);
-        jButtonDiode.addMouseListener(new ElementMouseListener("Diode"));
+        jButtonNormalDiode = new JButton();
+        jButtonNormalDiode.setText("Dioda");
+        jButtonNormalDiode.setBounds(5, MAP_TOP_Y + 35, 150, 30);
+        jButtonNormalDiode.addMouseListener(new ElementMouseListener("NormalDiode"));
+
+        jButtonReversedDiode = new JButton();
+        jButtonReversedDiode.setText("Dioda Odwrócona");
+        jButtonReversedDiode.setBounds(5, MAP_TOP_Y + 70, 150, 30);
+        jButtonReversedDiode.addMouseListener(new ElementMouseListener("ReversedDiode"));
+
+        jButtonGateXOR = new JButton();
+        jButtonGateXOR.setText("Bramka XOR");
+        jButtonGateXOR.setBounds(5, MAP_TOP_Y + 105, 150, 30);
+        jButtonGateXOR.addMouseListener(new ElementMouseListener("GateXOR"));
+
+        jButtonGateOR = new JButton();
+        jButtonGateOR.setText("Bramka OR");
+        jButtonGateOR.setBounds(5, MAP_TOP_Y + 140, 150, 30);
+        jButtonGateOR.addMouseListener(new ElementMouseListener("GateOR"));
 
         jButtonDelete = new JButton();
         jButtonDelete.setText("Usuń element");
-        jButtonDelete.setBounds(5, MAP_TOP_Y + 70, 150, 30);
+        jButtonDelete.setBounds(5, MAP_TOP_Y + 175, 150, 30);
         jButtonDelete.addActionListener((ActionEvent ae) -> {
             setComunicat("", true);
-            Tools.setDeleteOperation();
+            //Tools.setDeleteOperation();
         });
 
         jButtonStart = new JButton();
         jButtonStart.setText("Dalej...");
-        jButtonStart.setBounds(5, MAP_TOP_Y + 105, 150, 30);
+        jButtonStart.setBounds(5, MAP_TOP_Y + 210, 150, 30);
         jButtonStart.addActionListener((ActionEvent ae) -> {
             setComunicat("", true);
             Tools.setStartCurrent();
@@ -79,10 +96,14 @@ public class JFrameGenerator extends JFrame implements PicValues {
         jLabelInfo.setText("Wybierz przycisk opisujący element, a następnie umieść element na planszy");
 
         add(jButtonDelete);
-        add(jButtonConductor);
-        add(jButtonDiode);
-        add(jLabelInfo);
         add(jButtonStart);
+        add(jButtonConductor);
+        add(jButtonNormalDiode);
+        add(jButtonReversedDiode);
+        add(jButtonGateXOR);
+        add(jButtonGateOR);
+        add(jLabelInfo);
+
     }
 
     private void drawBoard(int mapHorizontalSize, int mapVerticalSize) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Wireworld.logicConector;
+package Wireworld.Logic;
 
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.GameLogic;
@@ -26,11 +26,7 @@ public class LogicOperator {
                 boardArray = new BoardGame[n + 1];
                 boardArray[0] = board;
                 for (int i = 0; i < (n); i++) {
-                    boardArray[i+1] = logic.makeGame(boardArray[i]);
-                    for(int k = 0; k < 10; k++){
-                        System.out.println();
-                    }
-                    
+                    boardArray[i + 1] = logic.makeGame(boardArray[i]);
                 }
             }
         };
@@ -38,7 +34,7 @@ public class LogicOperator {
     }
 
     public BoardGame getGeneration(int i, JLabel label) {
-       /* Do it later
+        /* Do it later
         
         int j = 0;
         while (boardArray[i] == null) {

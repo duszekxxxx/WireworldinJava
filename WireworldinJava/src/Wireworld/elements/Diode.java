@@ -6,8 +6,6 @@
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
-import Wireworld.Logic.ElectronHead;
-import Wireworld.Logic.ElectronTail;
 import Wireworld.generator.PicValues;
 import javax.swing.JLabel;
 
@@ -16,152 +14,122 @@ import javax.swing.JLabel;
  * @author Orion
  */
 public class Diode extends Element implements PicValues {
-    //It's not ready yet
-    //
-    //
-    //
-    //
+
+    private final String diodeType;
+
+    public Diode(String diodeType) {
+        super(diodeType + " " + "Diode");
+        if (diodeType.equals("Normal") || diodeType.equals("Reversed")) {
+            this.diodeType = diodeType;
+        } else {
+            throw new IllegalArgumentException("Diode constructor: diodeType must be \"Normal\" or \"Reversed\"");
+        }
+    }
+
     @Override
     public boolean isConectedToOther(int x, int y) {
         if (x == 0) {
             return true;
-        } else if ((board.getPointOnBoard(x - 1, y)) instanceof Conductor) {
-            return true;
+        } else {
+            if ((board.getPointOnBoard(x - 1, y)) instanceof Conductor) {
+                return true;
+            } else if ((board.getPointOnBoard(x, y - 1)) instanceof Conductor) {
+                return true;
+            } else if ((board.getPointOnBoard(x, y + 1)) instanceof Conductor) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public boolean isColision(int x, int y) {
-        for (int i = 0; i < 7; i++) {
-            if ((board.getPointOnBoard(x + i, y)) instanceof Conductor) {
-                return true;
+        for (int i = 0; i < 14; i++) {
+            if (i != 6 && i != 7) {
+                if ((board.getPointOnBoard(x + i, y)) instanceof Conductor) {
+                    return true;
+                }
+            } else {
+                if ((board.getPointOnBoard(x + i, y + 1)) instanceof Conductor) {
+                    return true;
+                } else if ((board.getPointOnBoard(x + i, y - 1)) instanceof Conductor) {
+                    return true;
+                }
             }
         }
-        for (int i = 8; i < 14; i++) {
-            if ((board.getPointOnBoard(x + i, y)) instanceof Conductor) {
-                return true;
-            }
+        switch (diodeType) {
+            case "Normal":
+                if ((board.getPointOnBoard(x + 6, y)) instanceof Conductor) {
+                    return true;
+                }
+                break;
+            case "Reversed":
+                if ((board.getPointOnBoard(x + 7, y)) instanceof Conductor) {
+                    return true;
+                }
+                break;
         }
         return false;
     }
 
     @Override
-    public void drawingOnMap(JLabel label, int x, int y, boolean isAlright) {
-        if (isAlright) {
-            tools.picChange(x, y, label);
-            tools.picChange(x, y + 1, label);
-            tools.picChange(x, y + 2, label);
-            tools.picChange(x, y + 3, label);
-            tools.picChange(x, y + 4, label);
-            tools.picChange(x, y + 5, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 7, label);
-            tools.picChange(x, y + 7, label);
-            tools.picChange(x, y + 8, label);
-            tools.picChange(x, y + 9, label);
-            tools.picChange(x, y + 10, label);
-            tools.picChange(x, y + 11, label);
-            tools.picChange(x, y + 12, label);
-            tools.picChange(x, y + 13, label);
-        } else {
-            tools.picChangeInvalid(x, y, label);
-            tools.picChangeInvalid(x, y + 1, label);
-            tools.picChangeInvalid(x, y + 2, label);
-            tools.picChangeInvalid(x, y + 3, label);
-            tools.picChangeInvalid(x, y + 4, label);
-            tools.picChangeInvalid(x, y + 5, label);
-            tools.picChangeInvalid(x, y + 6, label);
-            tools.picChangeInvalid(x, y + 6, label);
-            tools.picChangeInvalid(x, y + 6, label);
-            tools.picChangeInvalid(x, y + 7, label);
-            tools.picChangeInvalid(x, y + 7, label);
-            tools.picChangeInvalid(x, y + 8, label);
-            tools.picChangeInvalid(x, y + 9, label);
-            tools.picChangeInvalid(x, y + 10, label);
-            tools.picChangeInvalid(x, y + 11, label);
-            tools.picChangeInvalid(x, y + 12, label);
-            tools.picChangeInvalid(x, y + 13, label);
+    public void changePointsStatusOnBoard(int x, int y, String type) {
+        for (int i = 0; i < 14; i++) {
+            if (i != 6 && i != 7) {
+                setNewState(x + i, y, type);
+            } else {
+                setNewState(x + i, y - 1, type);
+                setNewState(x + i, y + 1, type);
+            }
+        }
+        switch (diodeType) {
+            case "Normal":
+                setNewState(x + 6, y, type);
+                break;
+            case "Reversed":
+                setNewState(x + 7, y, type);
+                break;
         }
     }
 
     @Override
-    public void drawingBackOnMap(JLabel label, int x, int y, boolean isAlright) {
-        if (isAlright) {
-            tools.picChange(x, y, label);
-            tools.picChange(x, y + 1, label);
-            tools.picChange(x, y + 2, label);
-            tools.picChange(x, y + 3, label);
-            tools.picChange(x, y + 4, label);
-            tools.picChange(x, y + 5, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 6, label);
-            tools.picChange(x, y + 7, label);
-            tools.picChange(x, y + 7, label);
-            tools.picChange(x, y + 8, label);
-            tools.picChange(x, y + 9, label);
-            tools.picChange(x, y + 10, label);
-            tools.picChange(x, y + 11, label);
-            tools.picChange(x, y + 12, label);
-            tools.picChange(x, y + 13, label);
-        } else {
-            tools.picChangeBack(x, y, label);
-            tools.picChangeBack(x, y + 1, label);
-            tools.picChangeBack(x, y + 2, label);
-            tools.picChangeBack(x, y + 3, label);
-            tools.picChangeBack(x, y + 4, label);
-            tools.picChangeBack(x, y + 5, label);
-            tools.picChangeBack(x, y + 6, label);
-            tools.picChangeBack(x, y + 6, label);
-            tools.picChangeBack(x, y + 6, label);
-            tools.picChangeBack(x, y + 7, label);
-            tools.picChangeBack(x, y + 7, label);
-            tools.picChangeBack(x, y + 8, label);
-            tools.picChangeBack(x, y + 9, label);
-            tools.picChangeBack(x, y + 10, label);
-            tools.picChangeBack(x, y + 11, label);
-            tools.picChangeBack(x, y + 12, label);
-            tools.picChangeBack(x, y + 13, label);
+    public boolean checkBoundaryConditions(int x, int y
+    ) {
+        return x > 1 || y < mapVerticalSize - 1 || y < 1 || x > mapHorizontalSize - 14;
+    }
+
+    @Override
+    public void drawElement(JLabel label, int x, int y, String type
+    ) {
+        tools.picChange(x, y, label, type);
+        tools.picChange(x + 1, y, label, type);
+        tools.picChange(x + 2, y, label, type);
+        tools.picChange(x + 3, y, label, type);
+        tools.picChange(x + 4, y, label, type);
+        tools.picChange(x + 5, y, label, type);
+        tools.picChange(x + 6, y - 1, label, type);
+        tools.picChange(x + 6, y + 1, label, type);
+        tools.picChange(x + 7, y - 1, label, type);
+        tools.picChange(x + 7, y + 1, label, type);
+        tools.picChange(x + 8, y, label, type);
+        tools.picChange(x + 9, y, label, type);
+        tools.picChange(x + 10, y, label, type);
+        tools.picChange(x + 11, y, label, type);
+        tools.picChange(x + 12, y, label, type);
+        tools.picChange(x + 13, y, label, type);
+
+        switch (diodeType) {
+            case "Normal":
+                tools.picChange(x + 6, y, label, type);
+                break;
+            case "Reversed":
+                tools.picChange(x + 7, y, label, type);
+                break;
         }
-    }
-
-    @Override
-    public void settingPointsOnBoard(int x, int y) {
-        board.setPointOnBoard(new ElectronTail(), x, y);
-        board.setPointOnBoard(new ElectronHead(), x, y + 1);
-        board.setPointOnBoard(new Conductor(), x, y + 2);
-        board.setPointOnBoard(new Conductor(), x, y + 3);
-        board.setPointOnBoard(new Conductor(), x, y + 4);
-        board.setPointOnBoard(new Conductor(), x, y + 5);
-        board.setPointOnBoard(new Conductor(), x, y + 6);
-        board.setPointOnBoard(new Conductor(), x, y + 6);
-        board.setPointOnBoard(new Conductor(), x, y + 6);
-        board.setPointOnBoard(new Conductor(), x, y + 7);
-        board.setPointOnBoard(new Conductor(), x, y + 7);
-        board.setPointOnBoard(new Conductor(), x, y + 8);
-        board.setPointOnBoard(new Conductor(), x, y + 9);
-        board.setPointOnBoard(new Conductor(), x, y + 10);
-        board.setPointOnBoard(new Conductor(), x, y + 11);
-        board.setPointOnBoard(new Conductor(), x, y + 12);
-        board.setPointOnBoard(new Conductor(), x, y + 13);
-    }
-
-    @Override
-    public boolean checkBoundaryConditions(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deletePointsFromBoard(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean checkDeletionPosibility(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

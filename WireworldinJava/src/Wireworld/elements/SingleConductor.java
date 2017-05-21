@@ -15,6 +15,10 @@ import javax.swing.JLabel;
  */
 public class SingleConductor extends Element {
 
+    public SingleConductor() {
+        super("SingleConductor");
+    }
+
     @Override
     public boolean isColision(int x, int y) {
         return (board.getPointOnBoard(x, y)) instanceof Conductor;
@@ -24,24 +28,23 @@ public class SingleConductor extends Element {
     public boolean isConectedToOther(int x, int y) {
         if (x == 0) {
             return true;
-        } else if ((board.getPointOnBoard(x - 1, y)) instanceof Conductor) {
-            return true;
+        } else {
+            if ((board.getPointOnBoard(x - 1, y)) instanceof Conductor) {
+                return true;
+            } else if ((board.getPointOnBoard(x + 1, y)) instanceof Conductor) {
+                return true;
+            } else if ((board.getPointOnBoard(x, y - 1)) instanceof Conductor) {
+                return true;
+            } else if ((board.getPointOnBoard(x, y + 1)) instanceof Conductor) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public void drawingOnMap(JLabel label, int x, int y, boolean isAlright) {
-        if (isAlright) {
-            tools.picChange(x, y, label);
-        } else {
-            tools.picChangeInvalid(x, y, label);
-        }
-    }
-
-    @Override
-    public void settingPointsOnBoard(int x, int y) {
-        board.setPointOnBoard(new Conductor(super.getCounter(), 0, "SingleConductor"), x, y);
+    public void changePointsStatusOnBoard(int x, int y, String type) {
+        setNewState(x, y, type);
     }
 
     @Override
@@ -50,28 +53,12 @@ public class SingleConductor extends Element {
     }
 
     @Override
-    public void drawingBackOnMap(JLabel label, int x, int y, boolean isSetted) {
-        if (isSetted) {
-            tools.picChange(x, y, label);
-        } else {
-            tools.picChangeBack(x, y, label);
-        }
-    }
-
-    @Override
-    public void deletePointsFromBoard(int x, int y) {
-        board.setPointOnBoard(new EmptyCell(), x, y);
-    }
-
-    @Override
     public boolean checkDeletionPosibility(int x, int y) {
-        boolean condition1 = x >= 0 && x < (mapHorizontalSize - 1);
-        boolean condition2 = y >= 0 && y < (mapVerticalSize - 1);
-        if(x < (mapHorizontalSize - 1)){
-            boolean condition3 = (board.getPointOnBoard(x+1, y)) instanceof EmptyCell;
-            return condition1 && condition2 && condition3;
-        } else{
-            return condition1 && condition2; 
-        }
+        return (board.getPointOnBoard(x + 1, y)) instanceof EmptyCell;
+    }
+
+    @Override
+    public void drawElement(JLabel label, int x, int y, String type) {
+        tools.picChange(x, y, label, type);
     }
 }

@@ -5,49 +5,40 @@
  */
 package Wireworld.elements;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  *
  * @author Orion
  */
-public class ElementsList {
+public class ElementsList implements ElementsListInterface {
 
-    private Element[] list;
-    int currentLength;
+    private ArrayList<Element> list;
 
     public ElementsList() {
-        list = new Element[2];
-        currentLength = 0;
+        list = new ArrayList<>();
     }
 
+    @Override
     public void addElement(Element element) {
-        if (currentLength == list.length) {
-            doubleSize();
-        }
-        list[currentLength++] = element;
+        list.add(element);
     }
 
-    public void deleteElement(int i) {
-        list[i] = null;
-    }
-
-    //do it when user wants to save generated Board
-    public void clearList() {
-        int nonNullCounter = 0;
-        Element[] newList = new Element[list.length];
-        for (Element listLoop : list) {
-            if (listLoop != null) {
-                newList[nonNullCounter] = listLoop;
-                nonNullCounter++;
+    @Override
+    public void deleteElement(int number) {
+        for(int i =0; i < list.size(); i++){
+            if((list.get(i)).getMyNumber() == number){
+                list.remove(i);
             }
         }
-        Element[] finalList = new Element[nonNullCounter];
-        System.arraycopy(newList, 0, finalList, 0, nonNullCounter);
-        list = finalList;
     }
 
-    private void doubleSize() {
-        Element[] newList = new Element[2 * currentLength];
-        System.arraycopy(list, 0, newList, 0, currentLength);
-        list = newList;
+    public Element getElement(int i) {
+        return list.get(i);
+    }
+
+    public Iterator getIterator() {
+        return list.iterator();
     }
 }

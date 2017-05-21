@@ -5,10 +5,10 @@
  */
 package Wireworld.windows;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import Wireworld.toolsAndSettings.SettingsContainer;
 import static Wireworld.toolsAndSettings.FramesTools.checkSettingsFieldsValue;
+import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.findColorName;
 
 /**
@@ -19,10 +19,10 @@ public class JFrameSettings extends javax.swing.JFrame {
 
     private SettingsContainer settingsContainer;
 
-    public JFrameSettings(SettingsContainer settingsContainer) {
+    public JFrameSettings() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
-        this.settingsContainer = settingsContainer;
+        this.settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         if (settingsContainer.isLoaded()) {
             setUpFields();
         }
@@ -56,6 +56,7 @@ public class JFrameSettings extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("WireWorld - Ustawienia wyglądu");
+        setLocationByPlatform(true);
 
         jLabel1.setText("Szerokość ramki[px]");
 
@@ -257,5 +258,4 @@ public class JFrameSettings extends javax.swing.JFrame {
         jTextFieldZoomMajor.setText(settingsContainer.getZoomMajor() + "");
         jTextFieldZoomMinor.setText(settingsContainer.getZoomMinor() + "");
     }
-
 }

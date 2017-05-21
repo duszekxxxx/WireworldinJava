@@ -5,13 +5,18 @@
  */
 package Wireworld.windows;
 
-
+import Wireworld.toolsAndSettings.FramesTools;
+import Wireworld.toolsAndSettings.SaveAndOpenGeneration;
 import Wireworld.toolsAndSettings.SettingsContainer;
 import Wireworld.toolsAndSettings.SettingsManager;
 import java.awt.Toolkit;
+import java.io.File;
 import static java.lang.Thread.sleep;
+import javax.swing.JFileChooser;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -21,14 +26,18 @@ public class JFrameViewer extends javax.swing.JFrame {
 
     private final int refreshTime;
     private final int generationsCount;
+    private static int currentGeneration;
+    private static boolean isLoopStart = false;
 
     public JFrameViewer() {
         initComponents();
         SettingsContainer sc = SettingsManager.getInstance().getSettingsContainer();
         refreshTime = sc.getRefreshTime();
         generationsCount = sc.getGenerationCount();
+        currentGeneration = 0;
         setUpComponents();
-        buttonsControler(0);
+        setUpFileFilters();
+        buttonsControler();
     }
 
     /**
@@ -40,6 +49,7 @@ public class JFrameViewer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooserSaveGeneration = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabelCurrentGeneration = new javax.swing.JLabel();
         jButtonPrevious = new javax.swing.JButton();
@@ -62,6 +72,7 @@ public class JFrameViewer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("WireWorld");
+        setLocationByPlatform(true);
 
         jLabelCurrentGeneration.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCurrentGeneration.setText("0");
@@ -234,7 +245,7 @@ public class JFrameViewer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneWithVisualizationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneWithVisualizationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -251,37 +262,29 @@ public class JFrameViewer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-        int currentValue = Integer.parseInt(jLabelCurrentGeneration.getText());
-        if (currentValue < generationsCount) {
+        if (currentGeneration < generationsCount) {
             refreshVisualization("upper");
         }
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     private void jButtonPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreviousActionPerformed
-        int currentValue = Integer.parseInt(jLabelCurrentGeneration.getText());
-        if (currentValue > 0) {
+        if (currentGeneration > 0) {
             refreshVisualization("lower");
         }
 
     }//GEN-LAST:event_jButtonPreviousActionPerformed
-    private int loopCounter = 0;
-    private boolean isLoopStart = false;
+
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
         Thread show;
         show = new Thread() {
             @Override
             public void run() {
                 try {
-                    loopCounter = Integer.parseInt(jLabelCurrentGeneration.getText());
-                    while (loopCounter < generationsCount && isLoopStart) {
+                    while (currentGeneration < generationsCount && isLoopStart) {
                         sleep(refreshTime);
                         //Checking isLoopStart again, cause sb could click stop when sleep was carried
                         if (isLoopStart) {
-                            loopCounter++;
                             refreshVisualization("upper");
-                            /*if (Thread.interrupted()) {
-                            throw new InterruptedException();
-                            }*/
                         }
                     }
                     jButtonStart.setText("Start");
@@ -297,7 +300,8 @@ public class JFrameViewer extends javax.swing.JFrame {
         try {
             int settedValue = Integer.parseInt(jTextFieldGoTo.getText());
             if (settedValue >= 0 && settedValue <= generationsCount) {
-                refreshVisualization(settedValue);
+                currentGeneration = settedValue;
+                refreshVisualization();
             } else {
                 jLabelCommunicats.setText("Niepoprawna wartość!");
             }
@@ -307,7 +311,13 @@ public class JFrameViewer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGoToActionPerformed
 
     private void jButtonSaveGenerationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveGenerationActionPerformed
-        // TODO add your handling code here:
+        int response = jFileChooserSaveGeneration.showSaveDialog(this);
+        File file = jFileChooserSaveGeneration.getSelectedFile();
+        if (file != null && response == JFileChooser.APPROVE_OPTION) {
+            if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
+                SaveAndOpenGeneration.saveToFile(file, jPanelRealTimeVisualization1.getGeneration(currentGeneration));
+            }
+        }
     }//GEN-LAST:event_jButtonSaveGenerationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -317,6 +327,7 @@ public class JFrameViewer extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrevious;
     private javax.swing.JButton jButtonSaveGeneration;
     private javax.swing.JButton jButtonStart;
+    private javax.swing.JFileChooser jFileChooserSaveGeneration;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCommunicats;
@@ -348,43 +359,42 @@ public class JFrameViewer extends javax.swing.JFrame {
     }
 
     private void refreshVisualization(String change) {
-        int generation = Integer.parseInt(jLabelCurrentGeneration.getText());
         switch (change) {
             case "lower":
-                generation -= 1;
+                currentGeneration -= 1;
                 break;
             case "upper":
-                generation += 1;
+                currentGeneration += 1;
                 break;
             default:
-                generation = 0;
+                currentGeneration = 0;
         }
-        jLabelCurrentGeneration.setText("" + generation);
-        buttonsControler(generation);
+        jLabelCurrentGeneration.setText("" + currentGeneration);
+        buttonsControler();
         jLabelCommunicats.setText("");
-        jPanelRealTimeVisualization1.refreshJPanel(generation);
+        jPanelRealTimeVisualization1.refreshJPanel(currentGeneration);
         jPanelRealTimeVisualization1.repaint();
     }
 
-    private void refreshVisualization(int generation) {
-        jLabelCurrentGeneration.setText("" + generation);
-        buttonsControler(generation);
+    private void refreshVisualization() {
+        jLabelCurrentGeneration.setText("" + currentGeneration);
+        buttonsControler();
         jLabelCommunicats.setText("");
-        jPanelRealTimeVisualization1.refreshJPanel(generation);
+        jPanelRealTimeVisualization1.refreshJPanel(currentGeneration);
         jPanelRealTimeVisualization1.repaint();
     }
 
-    private void buttonsControler(int generation) {
-        if (generation == generationsCount && jButtonNext.isEnabled()) {
+    private void buttonsControler() {
+        if (currentGeneration == generationsCount && jButtonNext.isEnabled()) {
             jButtonNext.setEnabled(false);
             jButtonStart.setEnabled(false);
-        } else if (generation != generationsCount && !jButtonNext.isEnabled()) {
+        } else if (currentGeneration != generationsCount && !jButtonNext.isEnabled()) {
             jButtonNext.setEnabled(true);
             jButtonStart.setEnabled(true);
         }
-        if (generation == 0 && jButtonPrevious.isEnabled()) {
+        if (currentGeneration == 0 && jButtonPrevious.isEnabled()) {
             jButtonPrevious.setEnabled(false);
-        } else if (generation != 0 && !jButtonPrevious.isEnabled()) {
+        } else if (currentGeneration != 0 && !jButtonPrevious.isEnabled()) {
             jButtonPrevious.setEnabled(true);
         }
     }
@@ -410,8 +420,13 @@ public class JFrameViewer extends javax.swing.JFrame {
             show.start();
         } else {
             isLoopStart = false;
-            show.interrupt(); // I don't know it is good or not - TO DO: read about it
+            show.interrupt();
             jButtonStart.setText("Start");
         }
+    }
+
+    private void setUpFileFilters() {
+        FileFilter loadFileFilter = new FileNameExtensionFilter("WireWorld", "xml");
+        jFileChooserSaveGeneration.addChoosableFileFilter(loadFileFilter);
     }
 }
