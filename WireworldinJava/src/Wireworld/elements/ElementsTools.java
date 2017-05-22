@@ -20,7 +20,6 @@ public class ElementsTools {
 
     public void picChange(int valueX, int valueY, JLabel label, String type) {
         JLabel elemLabel = findLabelByName(label.getParent(), valueX + "x" + valueY);
-        System.err.println(type);
         switch (type) {
             case "valid":
                 elemLabel.setIcon(new ImageIcon(getClass().getResource("../pConductor.png")));

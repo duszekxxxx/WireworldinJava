@@ -15,6 +15,7 @@ import Wireworld.generator.WireWorldManager;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -74,8 +75,8 @@ public class JFrameGenerator extends JFrame implements PicValues {
         jButtonDelete.setText("Usuń element");
         jButtonDelete.setBounds(5, MAP_TOP_Y + 175, 150, 30);
         jButtonDelete.addActionListener((ActionEvent ae) -> {
-            setComunicat("", true);
-            //Tools.setDeleteOperation();
+            setComunicat("Naciśnij na element, który chcesz usunąć!", true);
+            Tools.setDeleteOperation();
         });
 
         jButtonStart = new JButton();

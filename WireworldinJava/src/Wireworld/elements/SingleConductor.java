@@ -49,7 +49,7 @@ public class SingleConductor extends Element {
 
     @Override
     public boolean checkBoundaryConditions(int x, int y) {
-        return x > 0 || y < mapVerticalSize || x < mapHorizontalSize;
+        return x >= 0 && y >=0 && y < mapVerticalSize && x < mapHorizontalSize;
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Conductor implements States {
     }
 
     public Conductor() {
-
+        //required empty conductor (for Logic)
     }
 
     @Override

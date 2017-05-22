@@ -76,16 +76,14 @@ public abstract class Element {
         }
     }
 
-    public void deleteElement(JLabel label, int number) {
-        int x = tools.getX(label.getName());
-        int y = tools.getY(label.getName());
-        if (checkDeletionPosibility(x, y)) {
-            drawElement(label, x, y, "changeBack");
-            changePointsStatusOnBoard(x, y, "emptyCell");
-            elementsList.deleteElement(number);
-            JFrameGenerator.setComunicat("Element został dodany usunięty!", true);
+    public void deleteElement(JLabel label) {
+        if (checkDeletionPosibility(positionX, positionY)) {
+            changePointsStatusOnBoard(positionX, positionY, "emptyCell");
+            drawElement(label, positionX, positionY, "changeBack");
+            elementsList.deleteElement(myNumber);
+            JFrameGenerator.setComunicat("Element został usunięty!", true);
         } else {
-            JFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", true);
+            JFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", false);
         }
     }
 
