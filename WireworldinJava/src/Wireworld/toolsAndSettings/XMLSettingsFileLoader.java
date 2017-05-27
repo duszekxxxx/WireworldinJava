@@ -23,8 +23,8 @@ import org.xml.sax.SAXException;
  */
 public class XMLSettingsFileLoader {
 
-    private JLabel jLabelException;
-    private SettingsContainer settingsContainer;
+    private final JLabel jLabelException;
+    private final SettingsContainer settingsContainer;
 
     public XMLSettingsFileLoader(JLabel jLabelException, SettingsContainer settingsContainer) {
         this.jLabelException = jLabelException;
@@ -32,7 +32,6 @@ public class XMLSettingsFileLoader {
     }
 
     public Document getXMLDocument(File xmlFile) {
-
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         Document document = null;
         try {
@@ -82,7 +81,6 @@ public class XMLSettingsFileLoader {
             settingsContainer.setLoaded(true);
         } catch (NumberFormatException e) {
             jLabelException.setText("Nieprawidłowa zawartość pliku ustawień " + settingsContainer.getPath());
-            e.printStackTrace();
         } catch (IllegalArgumentException e) {
             jLabelException.setText(e.getMessage() + " " + settingsContainer.getPath());
         }

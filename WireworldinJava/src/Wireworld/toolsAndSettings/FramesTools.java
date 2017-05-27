@@ -6,9 +6,7 @@
 package Wireworld.toolsAndSettings;
 
 import static Wireworld.toolsAndSettings.SettingsTools.findColor;
-import java.awt.Color;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 import javax.swing.JLabel;
 

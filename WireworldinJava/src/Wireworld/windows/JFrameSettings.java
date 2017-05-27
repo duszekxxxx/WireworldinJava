@@ -17,7 +17,7 @@ import static Wireworld.toolsAndSettings.SettingsTools.findColorName;
  */
 public class JFrameSettings extends javax.swing.JFrame {
 
-    private SettingsContainer settingsContainer;
+    private final SettingsContainer settingsContainer;
 
     public JFrameSettings() {
         initComponents();

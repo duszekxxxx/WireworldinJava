@@ -127,4 +127,15 @@ public abstract class Element {
     public String getType() {
         return type;
     }
+
+    protected boolean isSthConectedAtEnd(int endX, int endY) {
+        if (endX < mapHorizontalSize - 1 && (board.getPointOnBoard(endX + 1, endY)) instanceof Conductor) {
+            return true;
+        } else if (endY < mapVerticalSize + 1 && (board.getPointOnBoard(endX - 1, endY + 1)) instanceof Conductor) {
+            return true;
+        } else if (endY < mapVerticalSize - 1 && (board.getPointOnBoard(endX - 1, endY - 1)) instanceof Conductor) {
+            return true;
+        }
+        return false;
+    }
 }

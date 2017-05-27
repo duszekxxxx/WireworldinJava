@@ -6,7 +6,6 @@
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
-import Wireworld.Logic.EmptyCell;
 import javax.swing.JLabel;
 
 /**
@@ -30,7 +29,7 @@ public class GateOR extends Element {
     }
 
     private boolean checkUpConection(int x, int y) {
-        if ((board.getPointOnBoard(x - 1, y-2)) instanceof Conductor) {
+        if ((board.getPointOnBoard(x - 1, y - 2)) instanceof Conductor) {
             return true;
         } else if ((board.getPointOnBoard(x, y - 3)) instanceof Conductor) {
             return true;
@@ -107,7 +106,7 @@ public class GateOR extends Element {
 
     @Override
     public boolean checkDeletionPosibility(int x, int y) {
-        return (board.getPointOnBoard(x + 14, y)) instanceof EmptyCell;
+        return !isSthConectedAtEnd(x + 13, y - 1);
     }
 
     @Override

@@ -6,7 +6,6 @@
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
-import Wireworld.Logic.EmptyCell;
 import Wireworld.generator.PicValues;
 import javax.swing.JLabel;
 
@@ -120,6 +119,6 @@ public class Diode extends Element implements PicValues {
 
     @Override
     public boolean checkDeletionPosibility(int x, int y) {
-        return (board.getPointOnBoard(x + 14, y)) instanceof EmptyCell;
+        return !isSthConectedAtEnd(x + 14, y);
     }
 }

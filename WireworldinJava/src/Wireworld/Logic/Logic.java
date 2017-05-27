@@ -1,5 +1,7 @@
 package Wireworld.Logic;
 
+import java.util.Iterator;
+
 public class Logic implements GameLogic {
 
     BoardGame board;
@@ -15,7 +17,6 @@ public class Logic implements GameLogic {
                 changedBoard.setPointOnBoard(changeState(board.getPointOnBoard(x, y), neighbourhood), x, y);
             }
         }
-
         return changedBoard;
     }
 
@@ -43,7 +44,6 @@ public class Logic implements GameLogic {
                 number++;
             }
         }
-
         return number;
     }
 

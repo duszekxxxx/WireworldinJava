@@ -5,8 +5,6 @@
  */
 package Wireworld.generator;
 
-import Wireworld.Logic.States;
-import static Wireworld.windows.JFrameGenerator.setComunicat;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;

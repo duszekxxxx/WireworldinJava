@@ -19,8 +19,9 @@ public class LogicOperator {
     private GameLogic logic = new Logic();
     private BoardGame[] boardArray;
 
-    public void generate(BoardGame board, int n) { // w oddzielnym wątku
-        Thread generating = new Thread() {
+    public void generate(BoardGame board, int n) {
+        Thread generating;
+        generating = new Thread() {
             @Override
             public void run() {
                 boardArray = new BoardGame[n + 1];
@@ -34,18 +35,6 @@ public class LogicOperator {
     }
 
     public BoardGame getGeneration(int i, JLabel label) {
-        /* Do it later
-        
-        int j = 0;
-        while (boardArray[i] == null) {
-            if (i == 0) {
-                label.setText("Czekaj  ");
-            }
-            for (int k = j; k < 5; k++) {
-                label.setText(label.getText() + ".");
-            }
-            j++;
-        }*/
         return boardArray[i];
     }
 }
