@@ -315,7 +315,7 @@ public class JFrameViewer extends javax.swing.JFrame {
         File file = jFileChooserSaveGeneration.getSelectedFile();
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
             if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
-                SaveAndOpenGeneration.saveToFile(file, jPanelRealTimeVisualization1.getGeneration(currentGeneration));
+                SaveAndOpenGeneration.saveToFile(file, jPanelRealTimeVisualization1.getGeneration(currentGeneration), jLabelCommunicats);
             }
         }
     }//GEN-LAST:event_jButtonSaveGenerationActionPerformed

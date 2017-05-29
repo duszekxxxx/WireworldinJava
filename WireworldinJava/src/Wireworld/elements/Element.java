@@ -76,17 +76,12 @@ public abstract class Element {
         }
     }
 
-    public void deleteElement(JLabel label, int number) {
-        int x = tools.getX(label.getName());
-        int y = tools.getY(label.getName());
-        if (checkDeletionPosibility(x, y)) {
-            drawElement(label, x, y, "changeBack");
-            changePointsStatusOnBoard(x, y, "emptyCell");
-            elementsList.deleteElement(number);
-            JFrameGenerator.setComunicat("Element został dodany usunięty!", true);
-        } else {
-            JFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", true);
-        }
+    public void deleteElement(JLabel label) {
+        changePointsStatusOnBoard(positionX, positionY, "emptyCell");
+        drawElement(label, positionX, positionY, "changeBack");
+        elementsList.deleteElement(myNumber);
+        JFrameGenerator.setComunicat("Element został usunięty!", true);
+
     }
 
     protected void setNewState(int x, int y, String type) {
@@ -108,8 +103,6 @@ public abstract class Element {
 
     public abstract void changePointsStatusOnBoard(int x, int y, String type);
 
-    public abstract boolean checkDeletionPosibility(int x, int y);
-
     public abstract boolean checkBoundaryConditions(int x, int y);
 
     public abstract void drawElement(JLabel label, int x, int y, String type);
@@ -128,5 +121,16 @@ public abstract class Element {
 
     public String getType() {
         return type;
+    }
+
+    protected boolean isSthConectedAtEnd(int endX, int endY) {
+        if (endX < mapHorizontalSize - 1 && (board.getPointOnBoard(endX + 1, endY)) instanceof Conductor) {
+            return true;
+        } else if (endY < mapVerticalSize + 1 && (board.getPointOnBoard(endX - 1, endY + 1)) instanceof Conductor) {
+            return true;
+        } else if (endY < mapVerticalSize - 1 && (board.getPointOnBoard(endX - 1, endY - 1)) instanceof Conductor) {
+            return true;
+        }
+        return false;
     }
 }

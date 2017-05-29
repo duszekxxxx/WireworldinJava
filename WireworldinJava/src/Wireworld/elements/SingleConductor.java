@@ -6,7 +6,6 @@
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
-import Wireworld.Logic.EmptyCell;
 import javax.swing.JLabel;
 
 /**
@@ -49,12 +48,7 @@ public class SingleConductor extends Element {
 
     @Override
     public boolean checkBoundaryConditions(int x, int y) {
-        return x > 0 || y < mapVerticalSize || x < mapHorizontalSize;
-    }
-
-    @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        return (board.getPointOnBoard(x + 1, y)) instanceof EmptyCell;
+        return x >= 0 && y >= 0 && y < mapVerticalSize && x < mapHorizontalSize;
     }
 
     @Override

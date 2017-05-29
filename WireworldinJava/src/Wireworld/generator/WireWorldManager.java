@@ -18,7 +18,7 @@ public class WireWorldManager {
 
     private static WireWorldManager ourInstance = null;
     private BoardGame board;
-    private final ElementsListInterface elementsList;
+    private ElementsListInterface elementsList;
 
     public static synchronized WireWorldManager getInstance() {
         if (null == ourInstance) {
@@ -37,6 +37,10 @@ public class WireWorldManager {
 
     public ElementsListInterface getElementsList() {
         return elementsList;
+    }
+    
+    public void setLoadedList(ElementsList elementsList){
+        this.elementsList = elementsList;
     }
 
     public void setBoard(BoardGame board) {

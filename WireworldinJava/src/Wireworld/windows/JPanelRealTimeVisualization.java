@@ -29,7 +29,6 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     private int columns;
     private int rows;
     private int generation;
-    //private GameLogic logic;
     private LogicOperator logic;
     private int currentCellSize;
     private SettingsContainer settingsContainer;
@@ -66,18 +65,16 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     /*Correct this when it will be conected with logic*/
     public void setUpJPanel(JLabel jLabeCommunicats) {
         BoardGame board = WireWorldManager.getInstance().getBoard();
-        SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
-        logic = new LogicOperator();
-        logic.generate(board, settingsContainer.getGenerationCount());
+        this.settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         this.columns = board.getHorizontalSize();
         this.rows = board.getVerticalSize();
-        
-        this.settingsContainer = settingsContainer;
+        this.jLabeCommunicats = jLabeCommunicats;
+        logic = new LogicOperator();
+        logic.generate(board, settingsContainer.getGenerationCount());
         currentCellSize = settingsContainer.getCellSize();
         currentDistanceBetweenCells = settingsContainer.getDistanceBetweenCells();
-        this.jLabeCommunicats = jLabeCommunicats;
         currentBoardWidth = settingsContainer.getFrameWidth();
-        zoom=100;
+        zoom = 100;
         Dimension panelSize = new Dimension(getPanelHeight(), getPanelWidth());
         setPreferredSize(panelSize);
     }
@@ -111,8 +108,8 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
             int currentHeight = currentBoardWidth;
             g2d.setColor(settingsContainer.getBoarderColor());
             g2d.fillRect(0, 0, getPanelHeight(), getPanelWidth());
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
+            for (int i = 0; i < columns; i++) {
+                for (int j = 0; j < rows; j++) {
                     States value = board.getPointOnBoard(i, j);
                     g2d.setColor(checkCellColor(value));
                     g2d.fillRect(currentHeight, currentWidth, currentCellSize, currentCellSize);
@@ -137,19 +134,20 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }
 
     private int getPanelHeight() {
-        int result = currentBoardWidth*2;
+        int result = currentBoardWidth * 2;
+        result += columns * currentCellSize;
+        result += (columns - 1) * +currentDistanceBetweenCells;
+        return result;
+    }
+
+    private int getPanelWidth() {
+        int result = currentBoardWidth * 2;
         result += rows * currentCellSize;
         result += (rows - 1) * +currentDistanceBetweenCells;
         return result;
     }
 
-    private int getPanelWidth() {
-        int result = currentBoardWidth*2;
-        result += columns * currentCellSize;
-        result += (columns - 1) * +currentDistanceBetweenCells;
-        return result;
-    }
-    public BoardGame getGeneration(int i){
+    public BoardGame getGeneration(int i) {
         return logic.getGeneration(i, jLabeCommunicats);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

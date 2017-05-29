@@ -5,6 +5,7 @@
  */
 package Wireworld.windows;
 
+import Wireworld.Logic.BoardGame;
 import Wireworld.generator.WireWorldManager;
 import Wireworld.toolsAndSettings.FramesTools;
 import Wireworld.toolsAndSettings.SettingsContainer;
@@ -20,6 +21,7 @@ import static Wireworld.toolsAndSettings.SaveAndOpenGeneration.openFile;
 import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
+import static Wireworld.toolsAndSettings.XMLGnerationParser.board;
 
 /**
  *
@@ -248,11 +250,14 @@ public class JFrameMain extends javax.swing.JFrame {
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
             if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
                 if (valueChecker() != null) {
-                    WireWorldManager.getInstance().setBoard(openFile(file));
-                    jLabelCommunicats.setText("");
-                    java.awt.EventQueue.invokeLater(() -> {
-                        new JFrameViewer().setVisible(true);
-                    });
+                    BoardGame board = openFile(file, jLabelCommunicats);
+                    if (board != null) {
+                        WireWorldManager.getInstance().setBoard(board);
+                        jLabelCommunicats.setText("");
+                        java.awt.EventQueue.invokeLater(() -> {
+                            new JFrameViewer().setVisible(true);
+                        });
+                    }
                 }
             }
         }

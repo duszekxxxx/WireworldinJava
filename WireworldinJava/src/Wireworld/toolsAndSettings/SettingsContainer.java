@@ -25,13 +25,10 @@ public class SettingsContainer {
     private int zoomMinor;
     private Color boarderColor;
     private boolean loaded;
-    private JLabel jLabelException;
-    private String path;
+    private final String path;
 
     public SettingsContainer(String path, JLabel jLabelException) {
-        this.jLabelException = jLabelException;
         this.path = path;
-        /*Move this fragment from this and move saveSettings and loadSettings to SettingsTools*/
         XMLSettingsFileLoader loader = new XMLSettingsFileLoader(jLabelException, this);
         Document document = loader.getXMLDocument(new File(path));
         if (document != null) {

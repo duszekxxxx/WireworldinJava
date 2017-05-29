@@ -17,7 +17,7 @@ public interface ElementsListInterface {
 
     public void deleteElement(int number);
 
-    public Element getElement(int i);
+    public Element getElementByNumber(int i);
 
     public Iterator getIterator();
 

@@ -93,31 +93,20 @@ public class Diode extends Element implements PicValues {
     }
 
     @Override
-    public boolean checkBoundaryConditions(int x, int y
-    ) {
-        return x > 1 || y < mapVerticalSize - 1 || y < 1 || x > mapHorizontalSize - 14;
+    public boolean checkBoundaryConditions(int x, int y) {
+        return x >= 0 && y >= 1 && y < mapVerticalSize - 1 && x < mapHorizontalSize - 13;
     }
 
     @Override
-    public void drawElement(JLabel label, int x, int y, String type
-    ) {
-        tools.picChange(x, y, label, type);
-        tools.picChange(x + 1, y, label, type);
-        tools.picChange(x + 2, y, label, type);
-        tools.picChange(x + 3, y, label, type);
-        tools.picChange(x + 4, y, label, type);
-        tools.picChange(x + 5, y, label, type);
-        tools.picChange(x + 6, y - 1, label, type);
-        tools.picChange(x + 6, y + 1, label, type);
-        tools.picChange(x + 7, y - 1, label, type);
-        tools.picChange(x + 7, y + 1, label, type);
-        tools.picChange(x + 8, y, label, type);
-        tools.picChange(x + 9, y, label, type);
-        tools.picChange(x + 10, y, label, type);
-        tools.picChange(x + 11, y, label, type);
-        tools.picChange(x + 12, y, label, type);
-        tools.picChange(x + 13, y, label, type);
-
+    public void drawElement(JLabel label, int x, int y, String type) {
+        for (int i = 0; i < 14; i++) {
+            if (i != 6 && i != 7) {
+                tools.picChange(x + i, y, label, type);
+            } else {
+                tools.picChange(x + i, y + 1, label, type);
+                tools.picChange(x + i, y - 1, label, type);
+            }
+        }
         switch (diodeType) {
             case "Normal":
                 tools.picChange(x + 6, y, label, type);
@@ -126,10 +115,5 @@ public class Diode extends Element implements PicValues {
                 tools.picChange(x + 7, y, label, type);
                 break;
         }
-    }
-
-    @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -14,7 +14,7 @@ import java.util.Iterator;
  */
 public class ElementsList implements ElementsListInterface {
 
-    private ArrayList<Element> list;
+    private final ArrayList<Element> list;
 
     public ElementsList() {
         list = new ArrayList<>();
@@ -27,17 +27,24 @@ public class ElementsList implements ElementsListInterface {
 
     @Override
     public void deleteElement(int number) {
-        for(int i =0; i < list.size(); i++){
-            if((list.get(i)).getMyNumber() == number){
+        for (int i = 0; i < list.size(); i++) {
+            if ((list.get(i)).getMyNumber() == number) {
                 list.remove(i);
             }
         }
     }
 
-    public Element getElement(int i) {
-        return list.get(i);
+    @Override
+    public Element getElementByNumber(int number) {
+        for (int i = 0; i < list.size(); i++) {
+            if ((list.get(i)).getMyNumber() == number) {
+                return list.get(i);
+            }
+        }
+        return null;
     }
 
+    @Override
     public Iterator getIterator() {
         return list.iterator();
     }

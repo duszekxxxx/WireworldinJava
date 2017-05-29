@@ -1,5 +1,7 @@
 package Wireworld.Logic;
 
+import java.util.ArrayList;
+
 public class Board implements BoardGame {
 
     private final States[][] board;
@@ -14,7 +16,15 @@ public class Board implements BoardGame {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
         this.board = new States[horizontalSize][verticalSize];
+    }
 
+    @Override
+    public void setEmptyCellsOnBoard() {
+        for (int i = 0; i < horizontalSize; i++) {
+            for (int j = 0; j < verticalSize; j++) {
+                setPointOnBoard(new EmptyCell(), i, j);
+            }
+        }
     }
 
     @Override
@@ -30,7 +40,7 @@ public class Board implements BoardGame {
         if (x >= 0 && x < this.horizontalSize && y >= 0 && y < this.verticalSize) {
             this.board[x][y] = value;
         } else {
-            throw new IllegalArgumentException("Value of x and y must be from 0 to veticalSize( or horizontalSize) -1");
+            throw new IllegalArgumentException("Value of x and y must be from 0 to veticalSize( or horizontalSize) - 1");
         }
     }
 
