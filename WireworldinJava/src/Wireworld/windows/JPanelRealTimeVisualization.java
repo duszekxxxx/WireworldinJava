@@ -31,12 +31,14 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     private int generation;
     private LogicOperator logic;
     private int currentCellSize;
-    private SettingsContainer settingsContainer;
+    private int primaryCellSize;
+    private int primaryDistanceBetweenCells;
     private int currentDistanceBetweenCells;
     private int zoom;
     private int currentBoardWidth;
+    private int primaryBoardWidth;
+    private Color boarderColor;
     private JLabel jLabeCommunicats;
-
     public JPanelRealTimeVisualization() {
         initComponents();
     }
@@ -65,15 +67,20 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     /*Correct this when it will be conected with logic*/
     public void setUpJPanel(JLabel jLabeCommunicats) {
         BoardGame board = WireWorldManager.getInstance().getBoard();
-        this.settingsContainer = SettingsManager.getInstance().getSettingsContainer();
+        SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         this.columns = board.getHorizontalSize();
         this.rows = board.getVerticalSize();
         this.jLabeCommunicats = jLabeCommunicats;
         logic = new LogicOperator();
         logic.generate(board, settingsContainer.getGenerationCount());
-        currentCellSize = settingsContainer.getCellSize();
-        currentDistanceBetweenCells = settingsContainer.getDistanceBetweenCells();
-        currentBoardWidth = settingsContainer.getFrameWidth();
+        primaryCellSize = settingsContainer.getCellSize();
+        primaryDistanceBetweenCells = settingsContainer.getDistanceBetweenCells();
+        primaryBoardWidth = settingsContainer.getFrameWidth();
+        boarderColor = settingsContainer.getBoarderColor();
+        //Set first value, before any zoom changing
+        currentCellSize = primaryCellSize;
+        currentDistanceBetweenCells = primaryDistanceBetweenCells;
+        currentBoardWidth = primaryBoardWidth; 
         zoom = 100;
         Dimension panelSize = new Dimension(getPanelHeight(), getPanelWidth());
         setPreferredSize(panelSize);
@@ -84,15 +91,15 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }
 
     public void zoom(int zoom) {
-        currentCellSize = settingsContainer.getCellSize() * zoom / 100;
-        if (settingsContainer.getCellSize() > 0 && currentCellSize == 0) {
+        currentCellSize = primaryCellSize * zoom / 100;
+        if (primaryCellSize > 0 && currentCellSize == 0) {
             currentCellSize = 1;
         }
-        currentDistanceBetweenCells = settingsContainer.getDistanceBetweenCells() * zoom / 100;
-        if (settingsContainer.getDistanceBetweenCells() > 0 && currentDistanceBetweenCells == 0) {
+        currentDistanceBetweenCells = primaryDistanceBetweenCells * zoom / 100;
+        if (primaryDistanceBetweenCells > 0 && currentDistanceBetweenCells == 0) {
             currentDistanceBetweenCells = 1;
         }
-        currentBoardWidth = settingsContainer.getFrameWidth() * zoom / 100;
+        currentBoardWidth = primaryBoardWidth * zoom / 100;
         Dimension newSize = new Dimension(getPanelHeight(), getPanelWidth());
         setPreferredSize(newSize);
         this.zoom = zoom;
@@ -106,7 +113,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
             Graphics2D g2d = (Graphics2D) g;
             int currentWidth = currentBoardWidth;
             int currentHeight = currentBoardWidth;
-            g2d.setColor(settingsContainer.getBoarderColor());
+            g2d.setColor(boarderColor);
             g2d.fillRect(0, 0, getPanelHeight(), getPanelWidth());
             for (int i = 0; i < columns; i++) {
                 for (int j = 0; j < rows; j++) {

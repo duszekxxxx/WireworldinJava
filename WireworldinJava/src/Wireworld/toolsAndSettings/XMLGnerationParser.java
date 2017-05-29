@@ -44,6 +44,8 @@ public class XMLGnerationParser {
             return board;
         } catch (ParserConfigurationException | IOException | SAXException ex) {
             label.setText("Nie udało się wczytać pliku");
+        } catch (Exception e){
+            label.setText("Niepoprawna struktura pliku");
         }
         return null;
     }

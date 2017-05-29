@@ -62,6 +62,11 @@ public class JFrameSettings extends javax.swing.JFrame {
 
         jTextFieldFrameWidth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldFrameWidth.setText("10");
+        jTextFieldFrameWidth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFrameWidthActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Odstęp między komórkami[px]");
 
@@ -218,6 +223,10 @@ public class JFrameSettings extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jTextFieldFrameWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFrameWidthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFrameWidthActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSave;

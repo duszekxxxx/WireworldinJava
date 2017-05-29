@@ -63,7 +63,6 @@ public class JFrameViewer extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButtonSaveGeneration = new javax.swing.JButton();
         jLabelCommunicats = new javax.swing.JLabel();
-        jButtonMayBeMoreGenerations = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jSliderZoom = new javax.swing.JSlider();
         jLabelZoom = new javax.swing.JLabel();
@@ -124,8 +123,6 @@ public class JFrameViewer extends javax.swing.JFrame {
         jLabelCommunicats.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCommunicats.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jButtonMayBeMoreGenerations.setText("More...?");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,9 +146,7 @@ public class JFrameViewer extends javax.swing.JFrame {
                         .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelCommunicats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonMayBeMoreGenerations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabelCommunicats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,9 +173,7 @@ public class JFrameViewer extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSaveGeneration)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonMayBeMoreGenerations)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(50, 50, 50)
                 .addComponent(jLabelCommunicats, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -316,13 +309,13 @@ public class JFrameViewer extends javax.swing.JFrame {
         if (file != null && response == JFileChooser.APPROVE_OPTION) {
             if (FramesTools.checkExtension(file, "xml", jLabelCommunicats)) {
                 SaveAndOpenGeneration.saveToFile(file, jPanelRealTimeVisualization1.getGeneration(currentGeneration), jLabelCommunicats);
+                jLabelCommunicats.setText("");
             }
         }
     }//GEN-LAST:event_jButtonSaveGenerationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGoTo;
-    private javax.swing.JButton jButtonMayBeMoreGenerations;
     private javax.swing.JButton jButtonNext;
     private javax.swing.JButton jButtonPrevious;
     private javax.swing.JButton jButtonSaveGeneration;

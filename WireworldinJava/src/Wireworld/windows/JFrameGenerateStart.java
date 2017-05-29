@@ -43,12 +43,17 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
         jLabel1.setText("Wymiary planszy:");
 
         jTextFieldX.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldX.setText("50");
+        jTextFieldX.setText("30");
+        jTextFieldX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldXActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("x");
 
         jTextFieldY.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldY.setText("50");
+        jTextFieldY.setText("30");
         jTextFieldY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldYActionPerformed(evt);
@@ -145,6 +150,10 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldXActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

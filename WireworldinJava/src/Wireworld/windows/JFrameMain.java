@@ -21,7 +21,6 @@ import static Wireworld.toolsAndSettings.SaveAndOpenGeneration.openFile;
 import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
-import static Wireworld.toolsAndSettings.XMLGnerationParser.board;
 
 /**
  *
@@ -34,7 +33,7 @@ public class JFrameMain extends javax.swing.JFrame {
     public JFrameMain() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
-        SettingsManager.getInstance().setSettingsContainer("defaultSettings.xml", jLabelCommunicats);
+        SettingsManager.getInstance().setSettingsContainer("./src/Wireworld/defaultSettings.xml", jLabelCommunicats);
         settingsContainer = SettingsManager.getInstance().getSettingsContainer();
         if (settingsContainer.isLoaded()) {
             setUpFields();
@@ -271,6 +270,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 SettingsContainer newSettings = loadSettings(file.getPath(), jLabelCommunicats);
                 if (newSettings != null) {
                     settingsContainer = newSettings;
+                    SettingsManager.getInstance().setSettingsContainer(newSettings);
                     setUpFields();
                 }
             }
