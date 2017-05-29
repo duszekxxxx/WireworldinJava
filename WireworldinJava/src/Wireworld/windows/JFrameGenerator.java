@@ -192,9 +192,6 @@ public class JFrameGenerator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGenerateActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeleteElem;

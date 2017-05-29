@@ -1,6 +1,5 @@
 package Wireworld.Logic;
 
-import java.util.ArrayList;
 
 public class Board implements BoardGame {
 

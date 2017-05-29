@@ -102,7 +102,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (zoom > 0) {
-            BoardGame board = logic.getGeneration(generation, jLabeCommunicats);
+            BoardGame board = logic.getGeneration(generation);
             Graphics2D g2d = (Graphics2D) g;
             int currentWidth = currentBoardWidth;
             int currentHeight = currentBoardWidth;
@@ -148,7 +148,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }
 
     public BoardGame getGeneration(int i) {
-        return logic.getGeneration(i, jLabeCommunicats);
+        return logic.getGeneration(i);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

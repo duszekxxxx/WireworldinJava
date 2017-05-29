@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
- * @author Orion
+ *Klasa realizująca implementacje listy elementów gry
  */
 public class ElementsList implements ElementsListInterface {
 
     private final ArrayList<Element> list;
 
+    /**
+     * Konstruktor tworzący domyślnie Arrayliste
+     */
     public ElementsList() {
         list = new ArrayList<>();
     }

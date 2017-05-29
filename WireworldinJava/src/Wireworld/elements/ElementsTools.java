@@ -13,8 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Orion
+ *Klasa służy do 
  */
 public class ElementsTools {
 

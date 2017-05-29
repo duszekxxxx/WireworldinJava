@@ -9,8 +9,8 @@ import Wireworld.Logic.Conductor;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Orion
+/**
+ *Klasa relaizująca implementacje elementu: bramki OR
  */
 public class SingleConductor extends Element {
 

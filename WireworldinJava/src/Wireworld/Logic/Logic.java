@@ -1,7 +1,9 @@
+
 package Wireworld.Logic;
 
-import java.util.Iterator;
-
+/**
+ *Implementacja logiki gry
+ */
 public class Logic implements GameLogic {
 
     BoardGame board;

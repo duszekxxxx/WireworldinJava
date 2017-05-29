@@ -13,8 +13,7 @@ import Wireworld.windows.JFrameGenerator;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Orion
+ *Nadrzędna klasa, która stanowi wyjście do implementacji poszczególnych elementów, rysowania w generatorze;
  */
 public abstract class Element {
 
@@ -37,7 +36,10 @@ public abstract class Element {
         tools = new ElementsTools();
         this.type = type;
     }
-
+    /**
+     *Metoda ta służy do wyświetlenia, gdzie będzie narysowany element w generatorze 
+     * @param label przycisk od którego zaczyna się rysowanie obiektu
+     */
     public void drawOnMap(JLabel label) {
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
@@ -47,7 +49,10 @@ public abstract class Element {
             drawElement(label, x, y, "invalid");
         }
     }
-
+    /**
+     *Metoda ta cofa rysowanie elementów, które nie mają zostać narysowane
+     * @param label przycisk od którego zaczyna się rysowanie obiektu
+     */
     public void drawBackOnMap(JLabel label) {
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
@@ -55,7 +60,10 @@ public abstract class Element {
             drawElement(label, x, y, "changeBack");
         }
     }
-
+    /**
+     *Metoda ta służy do narysowania w wyznaczonym miejscu danego obiektu
+     * @param label przycisk od którego zaczyna się rysowanie obiektu
+     */
     public void drawOnMapAndSave(JLabel label) {
         int x = tools.getX(label.getName());
         int y = tools.getY(label.getName());
@@ -76,6 +84,10 @@ public abstract class Element {
         }
     }
 
+    /**
+     *Metoda ta służy do usuwania konkretnego elementu
+     * @param label przycisk od którego zaczyna się usuwanie
+     */
     public void deleteElement(JLabel label) {
         changePointsStatusOnBoard(positionX, positionY, "emptyCell");
         drawElement(label, positionX, positionY, "changeBack");
