@@ -138,11 +138,6 @@ public class GateXOR extends Element {
     }
 
     @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        return !isSthConectedAtEnd(x + 17, y - 1);
-    }
-
-    @Override
     public boolean checkBoundaryConditions(int x, int y) {
         return x >= 0 && y >= 4 && y < mapVerticalSize - 2 && x < mapHorizontalSize - 17;
     }

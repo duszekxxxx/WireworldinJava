@@ -116,9 +116,4 @@ public class Diode extends Element implements PicValues {
                 break;
         }
     }
-
-    @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        return !isSthConectedAtEnd(x + 14, y);
-    }
 }

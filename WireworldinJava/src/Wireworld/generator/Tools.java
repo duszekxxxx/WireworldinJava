@@ -45,6 +45,11 @@ public class Tools implements PicValues {
         previousLabel = null;
     }
 
+    public static void clearAll() {
+        clear();
+        setType("Nothing");
+    }
+
     public static void setStartCurrent() {
         BoardGame board = WireWorldManager.getInstance().getBoard();
         for (int i = 0; i < board.getVerticalSize(); i++) {
@@ -82,6 +87,8 @@ public class Tools implements PicValues {
                 return new GateXOR();
             case "GateOR":
                 return new GateOR();
+            case "Nothing":
+                return null;
             default:
                 setComunicat("Wybrano nieobsługiwany element", false);
                 return null;
@@ -89,14 +96,16 @@ public class Tools implements PicValues {
     }
 
     private void drawingControl(JLabel label, boolean isConstant) {
-        if (isConstant) {
-            element.drawOnMapAndSave(label);
-            previousLabel = null;
-            elementChoosen = false;
-            element = null;
-        } else {
-            element.drawOnMap(label);
-            previousLabel = label;
+        if (element != null) {
+            if (isConstant) {
+                element.drawOnMapAndSave(label);
+                previousLabel = null;
+                elementChoosen = false;
+                element = null;
+            } else {
+                element.drawOnMap(label);
+                previousLabel = label;
+            }
         }
     }
 

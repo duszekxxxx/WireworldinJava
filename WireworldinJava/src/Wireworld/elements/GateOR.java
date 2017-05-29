@@ -105,11 +105,6 @@ public class GateOR extends Element {
     }
 
     @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        return !isSthConectedAtEnd(x + 13, y - 1);
-    }
-
-    @Override
     public boolean checkBoundaryConditions(int x, int y) {
         return x >= 0 && y >= 3 && y < mapVerticalSize - 1 && x < mapHorizontalSize - 13;
     }

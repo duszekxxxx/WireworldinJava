@@ -77,14 +77,11 @@ public abstract class Element {
     }
 
     public void deleteElement(JLabel label) {
-        if (checkDeletionPosibility(positionX, positionY)) {
-            changePointsStatusOnBoard(positionX, positionY, "emptyCell");
-            drawElement(label, positionX, positionY, "changeBack");
-            elementsList.deleteElement(myNumber);
-            JFrameGenerator.setComunicat("Element został usunięty!", true);
-        } else {
-            JFrameGenerator.setComunicat("Element nie może mieć przyłączone nic z prawej strony", false);
-        }
+        changePointsStatusOnBoard(positionX, positionY, "emptyCell");
+        drawElement(label, positionX, positionY, "changeBack");
+        elementsList.deleteElement(myNumber);
+        JFrameGenerator.setComunicat("Element został usunięty!", true);
+
     }
 
     protected void setNewState(int x, int y, String type) {
@@ -105,8 +102,6 @@ public abstract class Element {
     public abstract boolean isColision(int x, int y);
 
     public abstract void changePointsStatusOnBoard(int x, int y, String type);
-
-    public abstract boolean checkDeletionPosibility(int x, int y);
 
     public abstract boolean checkBoundaryConditions(int x, int y);
 

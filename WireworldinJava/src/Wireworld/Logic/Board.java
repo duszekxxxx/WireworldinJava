@@ -19,6 +19,15 @@ public class Board implements BoardGame {
     }
 
     @Override
+    public void setEmptyCellsOnBoard() {
+        for (int i = 0; i < horizontalSize; i++) {
+            for (int j = 0; j < verticalSize; j++) {
+                setPointOnBoard(new EmptyCell(), i, j);
+            }
+        }
+    }
+
+    @Override
     public States getPointOnBoard(int x, int y) {
         if (x < 0 || x >= this.horizontalSize || y < 0 || y >= this.verticalSize) {
             return null;

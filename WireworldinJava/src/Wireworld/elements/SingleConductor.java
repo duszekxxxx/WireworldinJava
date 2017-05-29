@@ -52,11 +52,6 @@ public class SingleConductor extends Element {
     }
 
     @Override
-    public boolean checkDeletionPosibility(int x, int y) {
-        return isSthConectedAtEnd(x, y);
-    }
-
-    @Override
     public void drawElement(JLabel label, int x, int y, String type) {
         tools.picChange(x, y, label, type);
     }
