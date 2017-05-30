@@ -18,7 +18,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JLabel;
 
 /**
  *
@@ -38,7 +37,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     private int currentBoardWidth;
     private int primaryBoardWidth;
     private Color boarderColor;
-    private JLabel jLabeCommunicats;
+
     public JPanelRealTimeVisualization() {
         initComponents();
     }
@@ -65,14 +64,13 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /*Correct this when it will be conected with logic*/
-    public void setUpJPanel(JLabel jLabeCommunicats) {
+    public void setUpJPanel() {
         BoardGame board = WireWorldManager.getInstance().getBoard();
         SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
-        this.columns = board.getHorizontalSize();
-        this.rows = board.getVerticalSize();
-        this.jLabeCommunicats = jLabeCommunicats;
         logic = new LogicOperator();
         logic.generate(board, settingsContainer.getGenerationCount());
+        columns = board.getHorizontalSize();
+        rows = board.getVerticalSize();
         primaryCellSize = settingsContainer.getCellSize();
         primaryDistanceBetweenCells = settingsContainer.getDistanceBetweenCells();
         primaryBoardWidth = settingsContainer.getFrameWidth();
@@ -80,7 +78,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         //Set first value, before any zoom changing
         currentCellSize = primaryCellSize;
         currentDistanceBetweenCells = primaryDistanceBetweenCells;
-        currentBoardWidth = primaryBoardWidth; 
+        currentBoardWidth = primaryBoardWidth;
         zoom = 100;
         Dimension panelSize = new Dimension(getPanelHeight(), getPanelWidth());
         setPreferredSize(panelSize);
@@ -136,7 +134,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         } else if (value instanceof ElectronHead) {
             return Color.BLUE;
         } else {
-            return Color.RED;
+            throw new IllegalArgumentException("That state is not operated!");
         }
     }
 

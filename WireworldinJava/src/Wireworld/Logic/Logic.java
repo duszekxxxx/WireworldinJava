@@ -1,8 +1,7 @@
-
 package Wireworld.Logic;
 
 /**
- *Implementacja logiki gry
+ * Implementacja logiki gry
  */
 public class Logic implements GameLogic {
 

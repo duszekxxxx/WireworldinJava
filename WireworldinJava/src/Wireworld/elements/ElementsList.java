@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *Klasa realizująca implementacje listy elementów gry
+ * Klasa realizująca implementacje listy elementów gry
  */
 public class ElementsList implements ElementsListInterface {
 

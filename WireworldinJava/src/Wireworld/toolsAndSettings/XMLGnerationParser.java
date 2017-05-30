@@ -4,7 +4,6 @@ import Wireworld.Logic.Board;
 import Wireworld.Logic.BoardGame;
 import Wireworld.Logic.ElectronHead;
 import Wireworld.Logic.ElectronTail;
-import Wireworld.Logic.EmptyCell;
 import Wireworld.elements.Diode;
 import Wireworld.elements.ElementsList;
 import Wireworld.elements.GateOR;
@@ -44,7 +43,7 @@ public class XMLGnerationParser {
             return board;
         } catch (ParserConfigurationException | IOException | SAXException ex) {
             label.setText("Nie udało się wczytać pliku");
-        } catch (Exception e){
+        } catch (Exception e) {
             label.setText("Niepoprawna struktura pliku");
         }
         return null;

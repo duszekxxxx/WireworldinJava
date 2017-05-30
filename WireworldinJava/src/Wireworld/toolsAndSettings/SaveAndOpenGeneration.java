@@ -72,7 +72,6 @@ public class SaveAndOpenGeneration {
             } else {
                 sb.append("</").append(name[0]).append(">\n");
             }
-
         }
         return sb.toString();
     }

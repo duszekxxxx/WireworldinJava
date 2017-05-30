@@ -254,7 +254,7 @@ public class JFrameSettings extends javax.swing.JFrame {
         String boarderColor = jComboBoxBoarderColor.getSelectedItem().toString();
         String zoomMinor = jTextFieldZoomMinor.getText();
         String zoomMajor = jTextFieldZoomMajor.getText();
-        
+
         return checkSettingsFieldsValue(settingsContainer, jLabelException,
                 cellSize, distanceBetweenCells, frameWidth, boarderColor, zoomMinor, zoomMajor);
     }

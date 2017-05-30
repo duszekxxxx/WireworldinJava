@@ -10,8 +10,8 @@ import Wireworld.generator.PicValues;
 import javax.swing.JLabel;
 
 /**
-*Klasa stanowi implementacje jednego z elementów jakim jest dioda 
-*/
+ * Klasa stanowi implementacje jednego z elementów jakim jest dioda
+ */
 public class Diode extends Element implements PicValues {
 
     private final String diodeType;

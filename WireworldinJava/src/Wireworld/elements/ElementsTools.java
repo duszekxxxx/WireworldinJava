@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *Klasa służy do 
+ * Klasa służy do
  */
 public class ElementsTools {
 

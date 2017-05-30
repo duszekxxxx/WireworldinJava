@@ -9,7 +9,6 @@ import Wireworld.Logic.BoardGame;
 import Wireworld.elements.ElementsList;
 import Wireworld.elements.ElementsListInterface;
 
-
 /**
  *
  * @author Orion
@@ -38,8 +37,8 @@ public class WireWorldManager {
     public ElementsListInterface getElementsList() {
         return elementsList;
     }
-    
-    public void setLoadedList(ElementsList elementsList){
+
+    public void setLoadedList(ElementsList elementsList) {
         this.elementsList = elementsList;
     }
 

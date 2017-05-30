@@ -1,6 +1,5 @@
 package Wireworld.Logic;
 
-
 public class Board implements BoardGame {
 
     private final States[][] board;

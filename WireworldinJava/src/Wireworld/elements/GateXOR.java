@@ -9,7 +9,7 @@ import Wireworld.Logic.Conductor;
 import javax.swing.JLabel;
 
 /**
- *Klasa relaizująca implementacje elementu: bramki XOR
+ * Klasa relaizująca implementacje elementu: bramki XOR
  */
 public class GateXOR extends Element {
 

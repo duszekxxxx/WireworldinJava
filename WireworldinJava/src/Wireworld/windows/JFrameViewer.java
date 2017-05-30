@@ -400,7 +400,6 @@ public class JFrameViewer extends javax.swing.JFrame {
         jSliderZoom.setPaintTicks(true);
         jSliderZoom.setPaintLabels(true);
         jSliderZoom.addChangeListener(new sliderActionListner());
-        jPanelRealTimeVisualization1.setUpJPanel(jLabelCommunicats);
         jScrollPaneWithVisualizationPanel.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
         jScrollPaneWithVisualizationPanel.repaint();
         jScrollPaneWithVisualizationPanel.repaint();

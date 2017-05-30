@@ -39,7 +39,7 @@ public class SettingsTools {
                 }
                 printWriter.println("\t</visualSettings>");
                 printWriter.println("</wireWorldConfigFile>");
-				printWriter.close();
+                printWriter.close();
             }
             jLabelException.setText("");
         } catch (FileNotFoundException | NullPointerException ex) {

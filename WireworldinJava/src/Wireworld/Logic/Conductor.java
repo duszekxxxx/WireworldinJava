@@ -1,7 +1,7 @@
 package Wireworld.Logic;
 
 /**
- Klasa która stanowi jeden ze stanów zwany Conductorem
+ * Klasa która stanowi jeden ze stanów zwany Conductorem
  */
 public class Conductor implements States {
 

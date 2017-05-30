@@ -5,10 +5,8 @@
  */
 package Wireworld.Logic;
 
-import javax.swing.JLabel;
-
 /**
- Interfejs komunikacji grafiki z logiką
+ * Interfejs komunikacji grafiki z logiką
  */
 public class LogicOperator {
 
@@ -17,8 +15,9 @@ public class LogicOperator {
 
     /**
      * Metoda pozwala na tablicy n-kolejnych generacji
+     *
      * @param board plansza od której zaczyna się generowanie
-     * @param n  ilość plansz do wygenerowania kolejnych generacji
+     * @param n ilość plansz do wygenerowania kolejnych generacji
      */
     public void generate(BoardGame board, int n) {
         Thread generating;
@@ -34,10 +33,12 @@ public class LogicOperator {
         };
         generating.start();
     }
+
     /**
      * Metoda pozwala na dostanie sie do okreśłonej generacji
-     * @param i  numer generacji  
-     * @return  zwraca plansze z generacją
+     *
+     * @param i numer generacji
+     * @return zwraca plansze z generacją
      */
     public BoardGame getGeneration(int i) {
         return boardArray[i];

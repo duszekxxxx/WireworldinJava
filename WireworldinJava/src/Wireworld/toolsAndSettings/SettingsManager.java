@@ -7,7 +7,6 @@ package Wireworld.toolsAndSettings;
 
 import javax.swing.JLabel;
 
-
 /**
  *
  * @author Orion
@@ -31,6 +30,7 @@ public class SettingsManager {
     public void setSettingsContainer(String path, JLabel jLabelException) {
         this.settingsContainer = new SettingsContainer(path, jLabelException);
     }
+
     public void setSettingsContainer(SettingsContainer newSettings) {
         this.settingsContainer = newSettings;
     }

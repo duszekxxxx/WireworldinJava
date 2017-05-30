@@ -50,7 +50,8 @@ public abstract class Element {
         }
     }
     /**
-     *Metoda ta cofa rysowanie elementów, które nie mają zostać narysowane
+     *Metoda ta cofa rysowanie elementów, które nie mają zostać zapisane na planszy, 
+     * np. przy przesuwaniu elementu na planszy
      * @param label przycisk od którego zaczyna się rysowanie obiektu
      */
     public void drawBackOnMap(JLabel label) {
@@ -61,7 +62,8 @@ public abstract class Element {
         }
     }
     /**
-     *Metoda ta służy do narysowania w wyznaczonym miejscu danego obiektu
+     *Metoda ta służy do umieszczenia na stałe elementu w wyznaczonym miejscu 
+     *na planszy i w podglądzie generatora
      * @param label przycisk od którego zaczyna się rysowanie obiektu
      */
     public void drawOnMapAndSave(JLabel label) {
@@ -85,7 +87,7 @@ public abstract class Element {
     }
 
     /**
-     *Metoda ta służy do usuwania konkretnego elementu
+     *Metoda ta służy w geeratorze do usuwania konkretnego elementu
      * @param label przycisk od którego zaczyna się usuwanie
      */
     public void deleteElement(JLabel label) {

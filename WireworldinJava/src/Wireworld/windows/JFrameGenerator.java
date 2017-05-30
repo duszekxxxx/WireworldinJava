@@ -266,7 +266,7 @@ public class JFrameGenerator extends javax.swing.JFrame {
 
     public static void setComunicat(String message, boolean isPositive) {
         jLabelInformation.setText(message);
-        
+
         if (isPositive) {
             jLabelInformation.setForeground(Color.GREEN);
         } else {
