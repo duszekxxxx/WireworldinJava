@@ -1,23 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.Logic;
 
 /**
- * Interfejs komunikacji grafiki z logiką
+ * Klasa odpowiedzalna za komunikacę grafiki z logiką
  */
 public class LogicOperator {
 
-    private GameLogic logic = new Logic();
+    private final GameLogic logic = new Logic();
     private BoardGame[] boardArray;
 
     /**
-     * Metoda pozwala na tablicy n-kolejnych generacji
+     * Metoda tworzy tablicę n-kolejnych generacji
      *
-     * @param board plansza od której zaczyna się generowanie
-     * @param n ilość plansz do wygenerowania kolejnych generacji
+     * @param board plansza na podatwie której generowane są kolejne generacje
+     * @param n liczba generacji,które mają zostać wygenerowane
      */
     public void generate(BoardGame board, int n) {
         Thread generating;
@@ -35,12 +30,19 @@ public class LogicOperator {
     }
 
     /**
-     * Metoda pozwala na dostanie sie do okreśłonej generacji
+     * Metoda pozwala na pobranie okreśłonej generacji z wcześniej wygenerowanej
+     * tablicy
      *
      * @param i numer generacji
      * @return zwraca plansze z generacją
      */
     public BoardGame getGeneration(int i) {
-        return boardArray[i];
+        if (i < boardArray.length && i >= 0) {
+            return boardArray[i];
+        } else {
+            throw new IllegalArgumentException("LogicOperator.getGeneration: "
+                    + "wrong generation number");
+        }
+
     }
 }

@@ -23,13 +23,14 @@ import static Wireworld.toolsAndSettings.SettingsTools.loadSettings;
 import static Wireworld.toolsAndSettings.SettingsTools.saveSettings;
 
 /**
- *
- * @author Orion
+ *Klasa odpowiada za okno główne ukazujące się tuż po włączeniu
  */
 public class JFrameMain extends javax.swing.JFrame {
 
     private SettingsContainer settingsContainer;
-
+    /**
+     *Konstruktor ładuje usatwienia z pliku i ustawia ikonę programu
+     */
     public JFrameMain() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));

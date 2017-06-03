@@ -7,7 +7,7 @@ package Wireworld.windows;
 
 import Wireworld.Logic.Board;
 import Wireworld.generator.CellMouseListener;
-import Wireworld.generator.ElementMouseListener;
+import Wireworld.generator.ElementButtonMouseListener;
 import static Wireworld.generator.PicValues.CELLSIZE;
 import Wireworld.generator.Tools;
 import Wireworld.generator.WireWorldManager;
@@ -24,11 +24,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
- *
- * @author Orion
+ * Klasa stanowi okno generatora
  */
 public class JFrameGenerator extends javax.swing.JFrame {
 
+    /**
+     * Konstruktor tworzący generator o podanych wcześniej rozmiarach
+     *
+     * @param boardHorizontalSize rozmiar horyzonatlny planszy
+     * @param boardVerticalSize rozmiar wertykalny planszy
+     */
     public JFrameGenerator(int boardHorizontalSize, int boardVerticalSize) {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
@@ -37,7 +42,7 @@ public class JFrameGenerator extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //clearing all if user do sth earlier
+        //clearing all if user did sth earlier
         Tools.clearAll();
     }
 
@@ -238,15 +243,15 @@ public class JFrameGenerator extends javax.swing.JFrame {
 
     private void setListners() {
 
-        jButtonNewConductor.addMouseListener(new ElementMouseListener("SingleConductor"));
+        jButtonNewConductor.addMouseListener(new ElementButtonMouseListener("SingleConductor"));
 
-        jButtonNewDiode.addMouseListener(new ElementMouseListener("NormalDiode"));
+        jButtonNewDiode.addMouseListener(new ElementButtonMouseListener("NormalDiode"));
 
-        jButtonNewRDiode.addMouseListener(new ElementMouseListener("ReversedDiode"));
+        jButtonNewRDiode.addMouseListener(new ElementButtonMouseListener("ReversedDiode"));
 
-        jButtonNewGateXOR.addMouseListener(new ElementMouseListener("GateXOR"));
+        jButtonNewGateXOR.addMouseListener(new ElementButtonMouseListener("GateXOR"));
 
-        jButtonNewGateOR.addMouseListener(new ElementMouseListener("GateOR"));
+        jButtonNewGateOR.addMouseListener(new ElementButtonMouseListener("GateOR"));
 
         jButtonDeleteElem.addActionListener((ActionEvent ae) -> {
             setComunicat("Naciśnij na element, który chcesz usunąć!", true);
@@ -264,6 +269,13 @@ public class JFrameGenerator extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Metoda odpowiada za wyświetlania komunikatów
+     *
+     * @param message treść komunikatu
+     * @param isPositive - informacje o tym czy jest pozytywny(wyświetlić na
+     * zielono), cz negatywny(na czerwono)
+     */
     public static void setComunicat(String message, boolean isPositive) {
         jLabelInformation.setText(message);
 

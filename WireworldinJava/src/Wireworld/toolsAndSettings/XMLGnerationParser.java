@@ -23,12 +23,25 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * Klasa służy do parsowania pliku xml z generacji w celu wczytania ich na
+ * planszę
+ */
 public class XMLGnerationParser {
+
 
     public static BoardGame board;
     public static Document doc;
     private static ElementsList list;
 
+    /**
+     * Metoda parsuje plik xml, towrzy dla niego planszę i zapisuje w niej
+     * odpowiednie stany wyczytane z pliku
+     *
+     * @param file uchwyt na plik
+     * @param label etykieta do wyświetlania błędów
+     * @return zwraca planszę gry
+     */
     public static BoardGame parser(File file, JLabel label) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         list = new ElementsList();
@@ -43,8 +56,8 @@ public class XMLGnerationParser {
             return board;
         } catch (ParserConfigurationException | IOException | SAXException ex) {
             label.setText("Nie udało się wczytać pliku");
-        } catch (Exception e) {
-            label.setText("Niepoprawna struktura pliku");
+        }catch (Exception e){
+            label.setText("Niepoprawna struktura pliku!");
         }
         return null;
     }

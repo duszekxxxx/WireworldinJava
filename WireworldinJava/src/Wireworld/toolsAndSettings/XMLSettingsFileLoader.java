@@ -18,19 +18,30 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author Orion
+ * Klasa służy do parsowania pliku z ustawieniami
  */
 public class XMLSettingsFileLoader {
 
     private final JLabel jLabelException;
     private final SettingsContainer settingsContainer;
 
+    /**
+     * Konstruktor parsera
+     *
+     * @param jLabelException etykieta do wyświetlania komunikatów
+     * @param settingsContainer kontener ustawień
+     */
     public XMLSettingsFileLoader(JLabel jLabelException, SettingsContainer settingsContainer) {
         this.jLabelException = jLabelException;
         this.settingsContainer = settingsContainer;
     }
 
+    /**
+     * Metoda wczytuje plik do pamięci i zmienia go na instancje klasy Document
+     *
+     * @param xmlFile uchwyt na plik
+     * @return zwraca wczytany plik
+     */
     public Document getXMLDocument(File xmlFile) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         Document document = null;
@@ -44,6 +55,11 @@ public class XMLSettingsFileLoader {
         return document;
     }
 
+    /**
+     * Metoda służy do parsowania pliku xml i zapisu do kontenera ustawień
+     *
+     * @param document dokument z wczytanym plikiem
+     */
     public void xmlRead(Document document) {
         NodeList configurationList = document.getElementsByTagName("configuration");
         NodeList visualSettingsList = document.getElementsByTagName("visualSettings");
@@ -54,6 +70,15 @@ public class XMLSettingsFileLoader {
         Element visualSettingsElement = (Element) visualSettingsList.item(0);
         parseXMLFileData(configurationElement, visualSettingsElement);
     }
+
+    /**
+     * Metoda odpowiedzialna za pobranie danych o określonych tagach z dokumentu
+     *
+     * @param configurationElement element XML zawierający informacje o głównej
+     * konfiguracji
+     * @param visualSettingsElement element XML zawierający informacje o
+     * konfiguracji wizualnej
+     */
 
     private void parseXMLFileData(Element configurationElement, Element visualSettingsElement) {
         String generationCountText = configurationElement.getElementsByTagName("generationCount").item(0).getTextContent();
@@ -67,6 +92,19 @@ public class XMLSettingsFileLoader {
         setUpFields(generationCountText, refreshTimeText, cellSizeText, frameWidthText, distanceBetweenCellsText, zoomMajorText, zoomMinorText, boarderColorText);
     }
 
+    /**
+     * Metoda zamienia sparsowany tekst na odpowiednie wartości dodawane do
+     * kontenera ustawień
+     *
+     * @param generationCountText ilość generacji
+     * @param refreshTimeText czas odświeżania
+     * @param cellSizeText rozmiar komórki
+     * @param frameWidthText szerokość ramki
+     * @param distanceBetweenCellsText odległość między komórkami
+     * @param zoomMajorText zoom- podziałka główna
+     * @param zoomMinorText zoom - podziałka pomocnicza
+     * @param boarderColorText kolor tła planszy
+     */
     public void setUpFields(String generationCountText, String refreshTimeText, String cellSizeText,
             String frameWidthText, String distanceBetweenCellsText, String zoomMajorText, String zoomMinorText, String boarderColorText) {
         try {

@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
 import javax.swing.JLabel;
 
 /**
- * /**
- * Klasa relaizująca implementacje elementu: bramki OR
+ * Klasa relaizująca implementacje elementu: SingleConductor
  */
 public class SingleConductor extends Element {
 
+    /**
+     * Konstruktor tworzący element o nazwie "SingleConstructor"
+     */
     public SingleConductor() {
         super("SingleConductor");
     }

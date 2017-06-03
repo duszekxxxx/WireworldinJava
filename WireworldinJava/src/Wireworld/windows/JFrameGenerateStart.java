@@ -8,11 +8,14 @@ package Wireworld.windows;
 import java.awt.Toolkit;
 
 /**
- *
- * @author Orion
+ * Klasa jest graficznym przedstawieniem pobierania danych odnośnie rozmairu
+ * planszy do generatora
  */
 public class JFrameGenerateStart extends javax.swing.JFrame {
 
+    /**
+     * Konstruktor JFrameGenerateStart
+     */
     public JFrameGenerateStart() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));
@@ -44,11 +47,6 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
 
         jTextFieldX.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldX.setText("30");
-        jTextFieldX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldXActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("x");
 
@@ -104,7 +102,7 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
                 .addComponent(jLabelComunicats, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,10 +148,6 @@ public class JFrameGenerateStart extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextFieldXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldXActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

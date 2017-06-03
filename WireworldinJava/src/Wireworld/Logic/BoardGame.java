@@ -1,14 +1,15 @@
 package Wireworld.Logic;
 
 /**
- * Intefejs, który implementuje klasa odpowiedzialna za przechowywanie stanów obiektów.
+ * Intefejs, który implementuje klasa odpowiedzialna za przechowywanie stanów
+ * obiektów.
  */
 public interface BoardGame {
 
     /**
      * Metoda pozwala na dostęp do określonej komórki planszy
      *
-     * @param x współrżedna horyzontalna
+     * @param x współrzędna horyzontalna
      * @param y współrzędna wertykalna
      * @return zwraca obiekt stanu, który implementuje interfejs States
      */
@@ -22,7 +23,7 @@ public interface BoardGame {
     /**
      * Metoda pozwala na zapisanie stanu do określonej komórki planszy
      *
-     * @param x współrżedna horyzontalna
+     * @param x współrzedna horyzontalna
      * @param y współrzędna wertykalna
      * @param value konkretny stan
      */

@@ -12,11 +12,18 @@ import java.io.PrintWriter;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Orion
+ * Klasa służy do eksportu ustawień, importu ustawień oraz zmiany nazwy koloru
+ * na klase Color i na odwrót
  */
 public class SettingsTools {
 
+    /**
+     * Metoda służy do zapisu ustawień z kontenera do pliku xml
+     *
+     * @param file uchwyt na plik
+     * @param jLabelException etykieta na wyświetlanie błędów
+     * @param settingsContainer kontener z ustawieniami
+     */
     public static void saveSettings(File file, JLabel jLabelException, SettingsContainer settingsContainer) {
         try {
             try (PrintWriter printWriter = new PrintWriter(file)) {
@@ -47,6 +54,14 @@ public class SettingsTools {
         }
     }
 
+    /**
+     * Metoda służy do załadowania ustawień z pliku
+     *
+     * @param path ścieżka do pliku
+     * @param jLabelException etykieta do wyświetlania błędów
+     * @return zwraca kontener z ustawieniami, jeżeli operacaj otwarcia się
+     * powiedzie
+     */
     public static SettingsContainer loadSettings(String path, JLabel jLabelException) {
         SettingsContainer settingsContainer = new SettingsContainer(path, jLabelException);
         if (settingsContainer.isLoaded()) {
@@ -58,6 +73,12 @@ public class SettingsTools {
         }
     }
 
+    /**
+     * Metoda zamienia nazwę koloru na instancję klasy Color
+     *
+     * @param parse nazwa koloru
+     * @return instancja klasy Color
+     */
     public static Color findColor(String parse) {
         switch (parse) {
             case "Color.GRAY":
@@ -73,6 +94,12 @@ public class SettingsTools {
         }
     }
 
+    /**
+     * Metoda zamienia instancję klasy Color na nazwę koloru
+     *
+     * @param color instancja klasy Color
+     * @return nazwa koloru
+     */
     public static String findColorName(Color color) {
         if (color.equals(Color.GRAY)) {
             return "Color.GRAY";

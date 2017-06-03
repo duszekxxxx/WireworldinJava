@@ -21,6 +21,15 @@ public class Logic implements GameLogic {
         return changedBoard;
     }
 
+    /**
+     * Metoda (prywatna) odpwoiwadjąca za zmianę stanu komórki w wyniku analizy
+     * sąsiedztwa
+     *
+     * @param state Objekt States zawierający komórkę, której stan ma zostać
+     * zmieniony
+     * @param neighbourhood tablica zawierająca sąsiednie komórki
+     * @return Objekt States będący nowym stanem
+     */
     private States changeState(States state, States[] neighbourhood) {
         if (state instanceof ElectronHead) {
             return new ElectronTail();
@@ -38,6 +47,12 @@ public class Logic implements GameLogic {
         return state;
     }
 
+    /**
+     * Metoda (prywatna) zliczająca głowy elektronu w sąsiedztwie danej komórki
+     *
+     * @param neighbourhood tablica zawierająca sąsiednie komórki
+     * @return Liczba sąsiednich komórek, które są stanu Electron Head
+     */
     private int checkNeighbourhood(States[] neighbourhood) {
         int number = 0;
         for (States e : neighbourhood) {
@@ -48,6 +63,15 @@ public class Logic implements GameLogic {
         return number;
     }
 
+    /**
+     * Metoda (prywatna) odpowiadająca za stworzenie tablicy sąsiadujących
+     * komórek
+     *
+     * @param board Plamsza zawierająca komórki
+     * @param x - współrzędna x komórki, której sąsiedztwo jest sprawdzane
+     * @param y - współrzędna y komórki, której sąsiedztwo jest sprawdzane
+     * @return Objekt States będący nowym stanem
+     */
     private States[] getNeighbourhood(BoardGame board, int x, int y) {
         States[] tmp = new States[8];
         int k = 0;

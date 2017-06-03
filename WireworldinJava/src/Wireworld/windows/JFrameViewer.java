@@ -19,16 +19,19 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author Orion
+ * Klasa odpowiadająca za wyświetlanie głównego okna programu, w którym
+ * następuje wizualizacja przebiegu symulacji WireWorld
  */
 public class JFrameViewer extends javax.swing.JFrame {
 
     private final int refreshTime;
     private final int generationsCount;
-    private static int currentGeneration;
-    private static boolean isLoopStart = false;
+    private int currentGeneration;
+    private boolean isLoopStart = false;
 
+    /**
+     * Konstruktor JFrameViewer
+     */
     public JFrameViewer() {
         initComponents();
         SettingsContainer sc = SettingsManager.getInstance().getSettingsContainer();
@@ -352,15 +355,22 @@ public class JFrameViewer extends javax.swing.JFrame {
     }
 
     private void refreshVisualization(String change) {
-        switch (change) {
-            case "lower":
-                currentGeneration -= 1;
-                break;
-            case "upper":
-                currentGeneration += 1;
-                break;
-            default:
-                currentGeneration = 0;
+        synchronized (this) {
+            switch (change) {
+                case "lower":
+                    if (currentGeneration >= 0) {
+                        currentGeneration -= 1;
+                    }
+
+                    break;
+                case "upper":
+                    if (currentGeneration < generationsCount) {
+                        currentGeneration += 1;
+                    }
+                    break;
+                default:
+                    currentGeneration = 0;
+            }
         }
         jLabelCurrentGeneration.setText("" + currentGeneration);
         buttonsControler();
@@ -400,6 +410,7 @@ public class JFrameViewer extends javax.swing.JFrame {
         jSliderZoom.setPaintTicks(true);
         jSliderZoom.setPaintLabels(true);
         jSliderZoom.addChangeListener(new sliderActionListner());
+        jPanelRealTimeVisualization1.setUpJPanel();
         jScrollPaneWithVisualizationPanel.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
         jScrollPaneWithVisualizationPanel.repaint();
         jScrollPaneWithVisualizationPanel.repaint();

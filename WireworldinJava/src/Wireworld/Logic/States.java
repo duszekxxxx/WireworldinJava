@@ -1,13 +1,13 @@
 package Wireworld.Logic;
 
 /**
- * Interfejs odpowiada za implementacje poszczególnych stanów
+ * Interfejs poszczególnych stanów
  */
 public interface States {
 
     /**
-     * Metoda pozwala na uzyskanie informacji o tym do jakiego elementu
-     * przynależy dany stan
+     * Metoda zwrca numer elementu (który zostaje przypisany w konstruktorze).
+     * Korzysta z niej generator
      *
      * @return zwraca numer elementu
      */

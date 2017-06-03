@@ -20,8 +20,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author Orion
+ * Klasa odpowiadająca za panel wyświetlający WireWorld(wyświetlanie
+ * wizaulizacji)
  */
 public class JPanelRealTimeVisualization extends javax.swing.JPanel {
 
@@ -38,6 +38,9 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
     private int primaryBoardWidth;
     private Color boarderColor;
 
+    /**
+     * Konstruktor JPanelRealTimeVisualization
+     */
     public JPanelRealTimeVisualization() {
         initComponents();
     }
@@ -63,7 +66,11 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    /*Correct this when it will be conected with logic*/
+    /**
+     * Metoda służy do załadowania podstawowych informacji potrzebnych do
+     * rysowania takich jak: plansza i ustawienia
+     *
+     */
     public void setUpJPanel() {
         BoardGame board = WireWorldManager.getInstance().getBoard();
         SettingsContainer settingsContainer = SettingsManager.getInstance().getSettingsContainer();
@@ -84,10 +91,20 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         setPreferredSize(panelSize);
     }
 
+    /**
+     * Metoda pozwala na ustawienie numeru generacji, która ma być wyświetlana
+     *
+     * @param generation numer generacji
+     */
     public void refreshJPanel(int generation) {
         this.generation = generation;
     }
 
+    /**
+     * Metoda pozwala na odpowiednie wyskalowanie(zoomowanie) planszy
+     *
+     * @param zoom rozmiar powiększenia/pomniejszenia w procentach
+     */
     public void zoom(int zoom) {
         currentCellSize = primaryCellSize * zoom / 100;
         if (primaryCellSize > 0 && currentCellSize == 0) {
@@ -134,7 +151,7 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         } else if (value instanceof ElectronHead) {
             return Color.BLUE;
         } else {
-            throw new IllegalArgumentException("That state is not operated!");
+            return Color.RED;
         }
     }
 
@@ -152,6 +169,12 @@ public class JPanelRealTimeVisualization extends javax.swing.JPanel {
         return result;
     }
 
+    /**
+     * Metoda pozwala na otrzymanie generacji o konkretnym numerze
+     *
+     * @param i numer generacji
+     * @return zwraca wybraną generację
+     */
     public BoardGame getGeneration(int i) {
         return logic.getGeneration(i);
     }

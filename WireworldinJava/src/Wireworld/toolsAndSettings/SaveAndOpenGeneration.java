@@ -10,8 +10,19 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import javax.swing.JLabel;
 
+/**
+ * Klasa ta stanowi zbbiór funkcji służący do otwierania pliku generacji
+ */
 public class SaveAndOpenGeneration {
 
+    /**
+     * Metoda służy do zapisywania pliku z informacjami o konkretnej generacji w
+     * formacie .xml
+     *
+     * @param file uchwyt na plik
+     * @param board plansza z której ma być zapisana generacja
+     * @param label etykieta do wyświetlania błędów
+     */
     public static void saveToFile(File file, BoardGame board, JLabel label) {
 
         try (PrintWriter pw = new PrintWriter(file)) {
@@ -49,10 +60,22 @@ public class SaveAndOpenGeneration {
 
     }
 
+    /**
+     * Metoda służy do otwierania generacji z plików w formacie .xml
+     *
+     * @param file uchwyt na plik
+     * @param label etykieta do wyświetlania błędów
+     * @return zwraca plansze z owartą generacją
+     */
     public static BoardGame openFile(File file, JLabel label) {
         return XMLGnerationParser.parser(file, label);
     }
 
+    /**
+     * Metoda do generowania opisu Elementów zawartych na planszy
+     *
+     * @return Zwraca String z listą elementów
+     */
     private static String loadElements() {
         StringBuilder sb = new StringBuilder();
         Iterator it = (WireWorldManager.getInstance().getElementsList()).getIterator();
@@ -72,6 +95,7 @@ public class SaveAndOpenGeneration {
             } else {
                 sb.append("</").append(name[0]).append(">\n");
             }
+
         }
         return sb.toString();
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.generator;
 
 import Wireworld.Logic.BoardGame;
@@ -20,8 +15,9 @@ import static Wireworld.windows.JFrameGenerator.setComunicat;
 import javax.swing.JLabel;
 
 /**
+ * Klasa zawierająca narzędzia służące do operowania generatorem, tj. operowanie
+ * doadawaniem, usuwaniem elementów, podgląd
  *
- * @author Orion
  */
 public class Tools implements PicValues {
 
@@ -31,6 +27,12 @@ public class Tools implements PicValues {
     private static Element element = null;
     private static boolean deleteOperation = false;
 
+    /**
+     * Metoda ustawiająca typ wybranego przyciskiem elementu do ustaiwnia na
+     * plaszy
+     *
+     * @param myType Typ ustawianego elementu
+     */
     public static void setType(String myType) {
         type = myType;
         elementChoosen = true;
@@ -38,6 +40,9 @@ public class Tools implements PicValues {
         deleteOperation = false;
     }
 
+    /**
+     * Metoda powodująca zresetowanie parametrów ustawiania elementu
+     */
     public static void clear() {
         if (previousLabel != null) {
             element.drawBackOnMap(previousLabel);
@@ -45,11 +50,19 @@ public class Tools implements PicValues {
         previousLabel = null;
     }
 
+    /**
+     * Metoda powodująca zresetowanie parametrów ustawiania elementu wraz
+     * dodatkową zmianą typu na "Nothing"
+     */
     public static void clearAll() {
         clear();
         setType("Nothing");
     }
 
+    /**
+     * Metoda dodająca prąd na komórkach przyległych do lewego końca planszy,
+     * gdy plansza zostanie zatwierdzona
+     */
     public static void setStartCurrent() {
         BoardGame board = WireWorldManager.getInstance().getBoard();
         for (int i = 0; i < board.getVerticalSize(); i++) {
@@ -62,7 +75,14 @@ public class Tools implements PicValues {
         }
     }
 
-    public void changeElement(JLabel label, boolean isConstant) {
+    /**
+     * Metoda wykonująca przesunięcie elementu na podglądzie planszy
+     *
+     * @param label etykieta na której znajduje się obecnie kursor
+     * @param isConstant parametr określający czy zapisać element na stałe(dla
+     * wartości true), czy tylko umożliwić podgląd(dla wartości false)
+     */
+    public void moveElementOnMap(JLabel label, boolean isConstant) {
         if (elementChoosen) {
             if (element == null) {
                 element = getElementByType();
@@ -75,6 +95,11 @@ public class Tools implements PicValues {
         }
     }
 
+    /**
+     * Metoda tworząca nowy element na podstawie podanej nazwy
+     *
+     * @return Zwraca nowy Element
+     */
     private Element getElementByType() {
         switch (type) {
             case "ReversedDiode":
@@ -95,6 +120,13 @@ public class Tools implements PicValues {
         }
     }
 
+    /**
+     * Metoda wywołująca rysowanie elementu w podglądzie generatora
+     *
+     * @param isConstant parametr określający czy zapisać element na stałe(dla
+     * wartości true), czy tylko umożliwić podgląd
+     * @param label etykieta na której znajduje się obecnie kursor
+     */
     private void drawingControl(JLabel label, boolean isConstant) {
         if (element != null) {
             if (isConstant) {
@@ -109,17 +141,32 @@ public class Tools implements PicValues {
         }
     }
 
+    /**
+     * Metoda zwraca true, jeżeli wybrano opcję usuwania elementów, w przeciwnym
+     * wypadku zwraca false
+     *
+     * @return Zwraca true jeśli tak, false jeśli nie
+     */
     public boolean isDeleteOperation() {
         return deleteOperation;
     }
 
+    /**
+     * Metoda ustaiająca obecną operację na usuwanie elementu
+     */
     public static void setDeleteOperation() {
         clear();
         setType("");
         deleteOperation = true;
     }
 
-    void deleteElement(JLabel jLabel) {
+    /**
+     * Metoda realizująca usuwanie elementu z mapy
+     *
+     * @param jLabel Etykieta stanowiąca jeden z punktów elementu w podglądzie
+     * generatora
+     */
+    public void deleteElement(JLabel jLabel) {
         String loc[] = (jLabel.getName()).split("x");
         int x = Integer.parseInt(loc[0]);
         int y = Integer.parseInt(loc[1]);

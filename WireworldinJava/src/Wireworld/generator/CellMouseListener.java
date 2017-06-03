@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.generator;
 
 import java.awt.event.MouseEvent;
@@ -10,8 +5,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Orion
+ * Klasa implementująca MouseListner. Służy do wykrywania kliknięć myszki i
+ * ruchu myszy po planszy w generatorze , aby wstawić, usunąć, umożliwić podgląd
+ * elementu w generatorze
  */
 public class CellMouseListener implements MouseListener {
 
@@ -22,7 +18,7 @@ public class CellMouseListener implements MouseListener {
         if (tools.isDeleteOperation()) {
             tools.deleteElement((JLabel) me.getComponent());
         } else {
-            tools.changeElement((JLabel) me.getComponent(), true);
+            tools.moveElementOnMap((JLabel) me.getComponent(), true);
         }
     }
 
@@ -38,7 +34,7 @@ public class CellMouseListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent me) {
         if (!tools.isDeleteOperation()) {
-            tools.changeElement((JLabel) me.getComponent(), false);
+            tools.moveElementOnMap((JLabel) me.getComponent(), false);
         }
     }
 

@@ -1,7 +1,7 @@
 package Wireworld.Logic;
 
 /**
- * Interfejs stworzenie logiki gry
+ * Interfejs logiki gry
  */
 public interface GameLogic {
 

@@ -29,12 +29,10 @@ public interface ElementsListInterface {
      * @param i numer elementu
      * @return zwraca element listy
      */
-
     public Element getElementByNumber(int i);
 
     /**
-     * Metoda ta pozwala na łatwe iterowanie po liście zwracając iterator do tej
-     * listy
+     * Metoda zwracająca iterator listy elementów
      *
      * @return zwraca iterator listy
      */

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.windows;
 
 import java.awt.Toolkit;
@@ -12,13 +7,15 @@ import Wireworld.toolsAndSettings.SettingsManager;
 import static Wireworld.toolsAndSettings.SettingsTools.findColorName;
 
 /**
- *
- * @author Orion
+ * Okno odpowiada za wyświetlanie i zmianę ustawień programu
  */
 public class JFrameSettings extends javax.swing.JFrame {
 
     private final SettingsContainer settingsContainer;
 
+    /**
+     * Konstruktor JFrameSettings
+     */
     public JFrameSettings() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../wwIcon.png")));

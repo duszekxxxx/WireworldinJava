@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
@@ -16,6 +11,11 @@ public class Diode extends Element implements PicValues {
 
     private final String diodeType;
 
+    /**
+     * Konstruktor ustawiający rodzaj diody
+     *
+     * @param diodeType nazwa rodzaju diody
+     */
     public Diode(String diodeType) {
         super(diodeType + " " + "Diode");
         if (diodeType.equals("Normal") || diodeType.equals("Reversed")) {

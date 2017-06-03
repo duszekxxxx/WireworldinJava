@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Wireworld.elements;
 
 import Wireworld.Logic.Conductor;
@@ -13,6 +8,9 @@ import javax.swing.JLabel;
  */
 public class GateXOR extends Element {
 
+    /**
+     * Konstruktor tworzący element o nazwie "GateXOR"
+     */
     public GateXOR() {
         super("GateXOR");
     }
@@ -27,6 +25,14 @@ public class GateXOR extends Element {
         return checkDownConection(x, y);
     }
 
+    /**
+     * Metoda sprawdzająca połączenie przy górnym końcu elementu
+     *
+     * @param x - współrzędna x początku elementu
+     * @param y - współrzędna y początku elementu
+     * @return Zwaraca prawda, jeśli istnieje połączenie z innym elementem. W
+     * przeciwnym wypadku zwraca fałsz.
+     */
     private boolean checkUpConection(int x, int y) {
         if ((board.getPointOnBoard(x - 1, y - 2)) instanceof Conductor) {
             return true;
@@ -38,6 +44,14 @@ public class GateXOR extends Element {
         return false;
     }
 
+    /**
+     * Metoda sprawdzająca połączenie przy dolnym końcu elementu
+     *
+     * @param x - współrzędna x początku elementu
+     * @param y - współrzędna y początku elementu
+     * @return Zwaraca prawda, jeśli istnieje połączenie z innym elementem. W
+     * przeciwnym wypadku zwraca fałsz.
+     */
     private boolean checkDownConection(int x, int y) {
         if ((board.getPointOnBoard(x - 1, y)) instanceof Conductor) {
             return true;
